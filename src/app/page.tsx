@@ -1,6 +1,7 @@
 "use client";
 
-import About from "@/components/sections/About";
+import About from "@/components/sections/about/About";
+import ContactSection from "@/components/sections/contact/Contact";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -81,18 +82,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section
-        id="contact"
-        className="min-h-screen px-6 md:px-10 py-16 bg-gray-50"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          <span className="text-purple-600">Contact</span>
-        </h2>
-        <p className="mt-4 text-gray-600 max-w-3xl">
-          Formulário simples (nome, email, mensagem) + botões para
-          LinkedIn/GitHub.
-        </p>
-      </section>
+      <ContactSection />
     </>
   );
 }

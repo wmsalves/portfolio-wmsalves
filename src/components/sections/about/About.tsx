@@ -7,7 +7,7 @@ export default function About() {
   return (
     <motion.section
       id="about"
-      className="min-h-[calc(100vh-64px)] w-full max-w-6xl mx-auto px-6 md:px-8 py-16 text-gray-600"
+      className="min-h-[calc(100vh-64px)] w-full max-w-6xl mx-auto px-6 md:px-8 text-gray-600"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -48,20 +48,6 @@ export default function About() {
               functional but also accessible and pleasant to use.
             </p>
           </div>
-
-          {/* Small skill tags */}
-          <ul className="flex flex-wrap gap-2 mt-6">
-            {["Node.js", "TypeScript", "Next.js", "PostgreSQL", "Docker"].map(
-              (t) => (
-                <li
-                  key={t}
-                  className="text-xs font-medium px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-100"
-                >
-                  {t}
-                </li>
-              )
-            )}
-          </ul>
         </div>
 
         {/* What I Do */}
