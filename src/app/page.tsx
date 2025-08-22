@@ -1,5 +1,6 @@
 "use client";
 
+import About from "@/components/sections/About";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -48,15 +49,7 @@ export default function Home() {
 
       {/* ABOUT */}
       <section id="about" className="min-h-screen px-6 md:px-10 py-16 bg-white">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          <span className="text-purple-600">About</span> Me
-        </h2>
-        <p className="mt-4 text-gray-600 max-w-3xl">
-          Escreva aqui um resumo breve sobre sua experiência, stack principal
-          (Node.js, TypeScript, SQL/NoSQL, mensageria, cloud), e o tipo de
-          problema que você resolve. Podemos adicionar cards, timeline e badges
-          de tecnologias nesta seção.
-        </p>
+        <About />
       </section>
 
       {/* RESUME */}
