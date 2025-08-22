@@ -2,6 +2,7 @@
 
 import About from "@/components/sections/about/About";
 import ContactSection from "@/components/sections/contact/Contact";
+import ProjectsSection from "@/components/sections/project/Projects";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -68,18 +69,7 @@ export default function Home() {
       </section>
 
       {/* PORTFOLIO */}
-      <section
-        id="portfolio"
-        className="min-h-screen px-6 md:px-10 py-16 bg-white"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          <span className="text-purple-600">Portfolio</span>
-        </h2>
-        <p className="mt-4 text-gray-600 max-w-3xl">
-          Grade de projetos com filtros (tags), cards com stack e links para
-          GitHub/Demo.
-        </p>
-      </section>
+      <ProjectsSection />
 
       {/* CONTACT */}
       <ContactSection />
