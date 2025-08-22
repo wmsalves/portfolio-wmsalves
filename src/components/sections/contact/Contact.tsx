@@ -9,7 +9,7 @@ export default function ContactSection() {
   return (
     <motion.section
       id="contact"
-      className="min-h-[calc(100vh-64px)] w-full max-w-6xl mx-auto px-6 md:px-8 text-gray-600"
+      className="min-h-[calc(100vh-64px)] w-full max-w-6xl mx-auto px-6 md:px-8"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
