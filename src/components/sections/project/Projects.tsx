@@ -19,7 +19,7 @@ export default function ProjectsSection() {
         {/* Header */}
         <div className="text-center">
           <h2 className="text-4xl font-extrabold tracking-tight">
-            <span className="text-purple-600">PROJECTS</span>
+            <span className="text-purple-600">MY</span> PROJECTS
           </h2>
           <p className="text-gray-500 mt-2">
             Some of the things I’ve built recently

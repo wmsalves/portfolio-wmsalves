@@ -18,8 +18,6 @@ export default function ContactForm() {
     window.location.href = `mailto:wemersoncontas22@gmail.com?subject=${subject}&body=${body}`;
   }
 
-  const disabled = !name.trim() || !email.trim() || !message.trim();
-
   return (
     <motion.section
       id="contact-form"
