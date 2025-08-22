@@ -23,7 +23,7 @@ export default function Sidebar() {
               <span className="text-purple-600">.</span>
             </span>
           </Link>
-          <p className="text-sm text-gray-500 mt-1">Backend Developer</p>
+          <p className="text-sm text-gray-500 mt-1">Back-end Developer</p>
         </div>
 
         <nav className="flex-1 flex flex-col justify-center px-2 space-y-2">

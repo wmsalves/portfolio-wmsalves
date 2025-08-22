@@ -20,15 +20,34 @@ export default function Home() {
             Hi There! <br />
             I&apos;m <span className="text-purple-600">Wemerson</span>
           </h1>
+
           <p className="mt-4 text-gray-700 text-lg font-medium">
-            Backend Developer
+            Back-end Developer
           </p>
-          <a
-            href="#about"
-            className="inline-block mt-6 px-6 py-3 bg-purple-600 text-white font-semibold rounded-xl shadow-md hover:bg-purple-500 transition"
-          >
-            More About Me
-          </a>
+
+          {/* Novo texto */}
+          <div className="mt-4 max-w-2xl mx-auto md:mx-0 space-y-3 text-gray-700">
+            <p className="text-base md:text-lg leading-relaxed">
+              My name is <span className="font-semibold">Wemerson</span>,
+              I&apos;m 24 and an Information Systems student at{" "}
+              <span className="font-semibold">PUC Minas</span>. I work as a{" "}
+              <span className="font-semibold">Junior Developer</span> building
+              and maintaining applications with{" "}
+              <span className="font-semibold">JavaScript</span>,{" "}
+              <span className="font-semibold">TypeScript</span>,{" "}
+              <span className="font-semibold">Node.js</span>, and{" "}
+              <span className="font-semibold">SQL Server</span>, while expanding
+              my knowledge in <span className="font-semibold">C#/.NET</span>.
+            </p>
+            <p className="text-base md:text-lg leading-relaxed">
+              I&apos;m fascinated by how things work behind the scenes. I&apos;m
+              motivated by solving problems, creating efficient solutions, and
+              continuously improving both my technical and soft skills. I share
+              academic projects and personal experiments on{" "}
+              <span className="font-semibold">GitHub</span> as part of my
+              learning and growth in software development.
+            </p>
+          </div>
         </div>
 
         {/* Imagem */}
