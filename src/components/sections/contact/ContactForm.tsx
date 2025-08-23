@@ -83,6 +83,12 @@ export default function ContactForm() {
             aria-label="Your Message"
             className="px-4 py-3 bg-white text-gray-900 rounded-xl border border-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
+          <button
+            type="submit"
+            className="mt-2 px-6 py-3 bg-purple-500 rounded-md font-medium hover:bg-purple-600 transition"
+          >
+            Send Message
+          </button>
         </label>
       </form>
     </motion.section>
