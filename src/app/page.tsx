@@ -3,6 +3,7 @@
 import About from "@/components/sections/about/About";
 import ContactSection from "@/components/sections/contact/Contact";
 import ProjectsSection from "@/components/sections/project/Projects";
+import SkillsSection from "@/components/sections/skills/Skills";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -30,19 +31,8 @@ export default function Home() {
         <About />
       </section>
 
-      {/* RESUME */}
-      <section
-        id="resume"
-        className="min-h-screen px-6 md:px-10 py-16 bg-gray-50"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          <span className="text-purple-600">Resume</span>
-        </h2>
-        <p className="mt-4 text-gray-600 max-w-3xl">
-          Timeline de experiência, educação e certificações. Depois conectamos a
-          dados tipados em <code>src/data/resume.ts</code>.
-        </p>
-      </section>
+      {/* SKILLS */}
+      <SkillsSection />
 
       {/* PORTFOLIO */}
       <ProjectsSection />
