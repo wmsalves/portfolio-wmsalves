@@ -27,9 +27,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="min-h-screen px-6 md:px-10 py-16 bg-white">
-        <About />
-      </section>
+      <About />
 
       {/* SKILLS */}
       <SkillsSection />

@@ -52,7 +52,7 @@ function Category({ title, items }: { title: string; items: SkillItem[] }) {
 export default function SkillsSection() {
   return (
     <motion.section
-      id="resume"
+      id="skills"
       className="min-h-screen w-full px-6 md:px-8 py-16"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
