@@ -4,7 +4,6 @@ import About from "@/components/sections/about/About";
 import ContactSection from "@/components/sections/contact/Contact";
 import ProjectsSection from "@/components/sections/project/Projects";
 import SkillsSection from "@/components/sections/skills/Skills";
-import { motion } from "framer-motion";
 
 export default function Home() {
   return (
