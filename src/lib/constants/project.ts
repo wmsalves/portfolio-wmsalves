@@ -9,31 +9,12 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Orders API",
+    title: "BeWear",
     description:
-      "REST API for order management with authentication, pagination and webhooks.",
+      "A modern web e-commerce app built with Next.js, React, Tailwind CSS, and PostgreSQL, featuring a shopping cart, Stripe checkout, and user authentication. ",
     link: "https://github.com/wmsalves",
-    tags: ["Node.js", "TypeScript", "Prisma", "PostgreSQL"],
-    // image: "/images/projects/orders-api.jpg",
-  },
-  {
-    title: "Queue Worker",
-    description:
-      "Background worker for sending emails and processing jobs using queues.",
-    link: "https://github.com/wmsalves",
-    tags: ["Node.js", "BullMQ", "Redis", "Docker"],
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "This portfolio built with Next.js, TypeScript, Tailwind and Framer Motion.",
-    link: "https://github.com/wmsalves",
-    tags: ["Next.js", "Tailwind", "Framer Motion"],
-  },
-  {
-    title: "Analytics Dashboard",
-    description: "Dashboard with charts and role-based access control (RBAC).",
-    link: "https://github.com/wmsalves",
-    tags: ["Next.js", "Chart.js", "RBAC"],
+    tags: ["Next.js", "React", "Tailwind", "PostgreSQL", "Stripe"],
+    image: "/images/BeWear.png",
+    slug: "bewear",
   },
 ];
