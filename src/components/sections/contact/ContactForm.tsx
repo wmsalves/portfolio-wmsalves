@@ -7,12 +7,11 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  // honeypot simples anti-bot
   const [website, setWebsite] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (website) return; // se o honeypot foi preenchido, ignora
+    if (website) return;
     const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
     const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
     window.location.href = `mailto:wemersoncontas22@gmail.com?subject=${subject}&body=${body}`;
@@ -32,7 +31,7 @@ export default function ContactForm() {
         Feel free to drop me a line—I’ll get back to you as soon as I can!
       </p>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="grid gap-4">
         {/* Honeypot */}
         <input
           type="text"
@@ -52,6 +51,7 @@ export default function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            autoComplete="name"
             aria-label="Your Name"
             className="px-4 py-3 bg-white text-gray-900 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
@@ -65,6 +65,7 @@ export default function ContactForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="email"
             aria-label="Your Email"
             className="px-4 py-3 bg-white text-gray-900 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
@@ -83,13 +84,14 @@ export default function ContactForm() {
             aria-label="Your Message"
             className="px-4 py-3 bg-white text-gray-900 rounded-xl border border-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
-          <button
-            type="submit"
-            className="mt-2 px-6 py-3 bg-purple-500 rounded-md font-medium hover:bg-purple-600 transition"
-          >
-            Send Message
-          </button>
         </label>
+
+        <button
+          type="submit"
+          className="mt-1 inline-flex justify-center px-6 py-3 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition focus:outline-none focus:ring-2 focus:ring-purple-300"
+        >
+          Send Message
+        </button>
       </form>
     </motion.section>
   );

@@ -3,11 +3,7 @@
 import { SiGithub, SiLinkedin } from "react-icons/si";
 
 const socials = [
-  {
-    name: "GitHub",
-    icon: SiGithub,
-    url: "https://github.com/wmsalves",
-  },
+  { name: "GitHub", icon: SiGithub, url: "https://github.com/wmsalves" },
   {
     name: "LinkedIn",
     icon: SiLinkedin,
@@ -27,8 +23,7 @@ export default function ContactSocials() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={name}
-            className="bg-white border border-gray-200 p-3 rounded-full shadow-sm
-                       hover:bg-purple-600 hover:text-white transition-colors"
+            className="bg-white border border-gray-200 p-3 rounded-full shadow-sm hover:bg-purple-600 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-300"
           >
             <Icon className="w-5 h-5" />
           </a>
