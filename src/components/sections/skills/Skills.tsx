@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { SkillItem } from "@/lib/contants/skills";
-import { skills, frameworks, tools } from "@/lib/contants/skills";
+import type { SkillItem } from "@/lib/constants/skills";
+import { skills, frameworks, tools } from "@/lib/constants/skills";
 
 function levelBadge(level: SkillItem["level"]) {
   if (level === "proficient" || level === "experienced") {
