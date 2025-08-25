@@ -24,18 +24,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
-      {/* ABOUT */}
-      <About />
-
-      {/* SKILLS */}
-      <SkillsSection />
-
-      {/* PORTFOLIO */}
-      <ProjectsSection />
-
-      {/* CONTACT */}
-      <ContactSection />
     </>
   );
 }
