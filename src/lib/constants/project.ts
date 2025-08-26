@@ -26,4 +26,13 @@ export const projects: Project[] = [
     image: "/images/Salgadin.png",
     slug: "salgadin",
   },
+  {
+    title: "Blog",
+    description:
+      " A simple blog application demonstrating CRUD (Create, Read, Update, Delete) operations using Node.js, Express, EJS, and MongoDB. It provides a basic setup for building a full-stack application with a MongoDB database, user authentication, and dynamic content rendering.",
+    link: "https://github.com/wmsalves",
+    tags: ["NodeJS", "Express", "EJS", "MongoDB"],
+    image: "/images/Sandman.jpg",
+    slug: "blog",
+  },
 ];
