@@ -169,8 +169,9 @@ export default function Sidebar() {
                          shadow-xl flex flex-col"
             >
               <div className="px-4 h-14 flex items-center justify-between border-b dark:border-gray-800">
-                <span className="text-lg font-bold">
-                  Menu<span className="text-purple-600">.</span>
+                <span className="text-lg font-bold dark:text-gray-100">
+                  Menu
+                  <span className="text-purple-600">.</span>
                 </span>
                 <button
                   onClick={() => setOpen(false)}
