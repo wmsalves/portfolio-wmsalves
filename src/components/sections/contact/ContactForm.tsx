@@ -7,7 +7,7 @@ export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [website, setWebsite] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -26,8 +26,10 @@ export default function ContactForm() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <h3 className="text-2xl font-semibold text-gray-900">Send a Message</h3>
-      <p className="text-gray-500">
+      <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+        Send a Message
+      </h3>
+      <p className="text-gray-500 dark:text-gray-400">
         Feel free to drop me a line—I’ll get back to you as soon as I can!
       </p>
 
@@ -44,7 +46,9 @@ export default function ContactForm() {
         />
 
         <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-gray-700">Your Name</span>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Your Name
+          </span>
           <input
             type="text"
             placeholder="Jane Doe"
@@ -53,12 +57,16 @@ export default function ContactForm() {
             required
             autoComplete="name"
             aria-label="Your Name"
-            className="px-4 py-3 bg-white text-gray-900 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="px-4 py-3 rounded-xl border focus:outline-none focus:ring-2
+                       bg-white text-gray-900 border-gray-200 focus:ring-purple-500
+                       dark:bg-gray-900 dark:text-gray-100 dark:border-gray-800 dark:focus:ring-purple-500"
           />
         </label>
 
         <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-gray-700">Your Email</span>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Your Email
+          </span>
           <input
             type="email"
             placeholder="jane@email.com"
@@ -67,12 +75,14 @@ export default function ContactForm() {
             required
             autoComplete="email"
             aria-label="Your Email"
-            className="px-4 py-3 bg-white text-gray-900 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="px-4 py-3 rounded-xl border focus:outline-none focus:ring-2
+                       bg-white text-gray-900 border-gray-200 focus:ring-purple-500
+                       dark:bg-gray-900 dark:text-gray-100 dark:border-gray-800 dark:focus:ring-purple-500"
           />
         </label>
 
         <label className="flex flex-col gap-2">
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Your Message
           </span>
           <textarea
@@ -82,13 +92,18 @@ export default function ContactForm() {
             required
             rows={6}
             aria-label="Your Message"
-            className="px-4 py-3 bg-white text-gray-900 rounded-xl border border-gray-200 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="px-4 py-3 rounded-xl border resize-none focus:outline-none focus:ring-2
+                       bg-white text-gray-900 border-gray-200 focus:ring-purple-500
+                       dark:bg-gray-900 dark:text-gray-100 dark:border-gray-800 dark:focus:ring-purple-500"
           />
         </label>
 
         <button
           type="submit"
-          className="mt-1 inline-flex justify-center px-6 py-3 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition focus:outline-none focus:ring-2 focus:ring-purple-300"
+          className="mt-1 inline-flex justify-center px-6 py-3 rounded-xl font-medium
+                     bg-purple-600 text-white hover:bg-purple-700 transition
+                     focus:outline-none focus:ring-2 focus:ring-purple-300
+                     dark:focus:ring-purple-500"
         >
           Send Message
         </button>
