@@ -8,17 +8,23 @@ export default function ThemeToggle({
 }: {
   className?: string;
 }) {
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const ls = localStorage.getItem("theme");
-    const mql = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(ls ? ls === "dark" : mql.matches);
+    try {
+      const saved = localStorage.getItem("theme");
+      const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setIsDark(saved ? saved === "dark" : prefers);
+    } catch {
+      setIsDark(false);
+    }
   }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch {}
   }, [isDark]);
 
   return (
@@ -29,7 +35,7 @@ export default function ThemeToggle({
       aria-pressed={isDark}
       className={`inline-flex h-10 w-10 items-center justify-center rounded-lg border
                   border-purple-100 text-gray-700 hover:bg-purple-50 hover:text-purple-700
-                  dark:border-purple-900/30 dark:text-gray-200 dark:hover:bg-purple-950/40 ${className}`}
+                  dark:border-gray-800 dark:text-gray-200 dark:hover:bg-purple-950/40 ${className}`}
     >
       {isDark ? <Sun size={18} /> : <Moon size={18} />}
     </button>
