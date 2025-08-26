@@ -20,15 +20,16 @@ export default function RootLayout({
           id="theme-init"
           dangerouslySetInnerHTML={{
             __html: `
-(function() {
-  try {
-    var d = document.documentElement;
-    var saved = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var isDark = saved ? saved === 'dark' : prefersDark;
-    d.classList.toggle('dark', isDark);
-  } catch (e) {}
-})();
+            (function() {
+              try {
+                var d = document.documentElement;
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var saved = localStorage.getItem('theme');
+                d.classList.toggle('dark', isDark);
+                var isDark = saved ? saved === 'dark' : prefersDark;
+              })();
+            } 
+              catch (e) {}
             `.trim(),
           }}
         />
