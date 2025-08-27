@@ -1,4 +1,4 @@
-# Wemerson – Developer Portfolio (Next.js + TypeScript + Tailwind)
+# Developer Portfolio (Next.js + TypeScript + Tailwind)
 
 A clean, modern, and fully responsive personal portfolio built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **Framer Motion**.  
 It ships with a **persisted Dark Mode** (mobile & desktop), **brand color tokens**, and an accessible UI.
