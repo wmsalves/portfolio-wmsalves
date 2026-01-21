@@ -1,9 +1,4 @@
-export type SkillLevel = "proficient" | "experienced" | "familiar" | "learning";
-
-export type SkillItem = {
-  name: string;
-  level: SkillLevel;
-};
+import { SkillItem } from "@/types";
 
 export const skills: SkillItem[] = [
   { name: "JavaScript", level: "experienced" },

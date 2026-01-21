@@ -1,11 +1,4 @@
-export type Project = {
-  title: string;
-  description: string;
-  link: string;
-  image?: string; // ex: "/images/projects/orders-api.jpg"
-  tags?: string[]; // ex: ["Node.js","TypeScript"]
-  slug?: string;
-};
+import { Project } from "@/types";
 
 export const projects: Project[] = [
   {
@@ -29,7 +22,7 @@ export const projects: Project[] = [
   {
     title: "Blog",
     description:
-      " A simple blog application demonstrating CRUD (Create, Read, Update, Delete) operations using Node.js, Express, EJS, and MongoDB. It provides a basic setup for building a full-stack application with a MongoDB database, user authentication, and dynamic content rendering.",
+      "A simple blog application demonstrating CRUD (Create, Read, Update, Delete) operations using Node.js, Express, EJS, and MongoDB.",
     link: "https://github.com/wmsalves/blog-node-mongo",
     tags: ["NodeJS", "Express", "EJS", "MongoDB"],
     image: "/images/Sandman.jpg",

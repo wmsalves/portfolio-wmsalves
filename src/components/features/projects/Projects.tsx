@@ -1,9 +1,9 @@
 "use client";
 
-import { projects } from "../../../lib/constants/project";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { projects } from "@/lib/contants/project";
 
 export default function ProjectsSection() {
   return (
