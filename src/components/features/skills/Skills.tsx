@@ -1,9 +1,9 @@
 "use client";
 
-import { skills, frameworks, tools } from "@/lib/contants/skills";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import { Database, Globe, Layers, Terminal, LucideIcon } from "lucide-react";
+import { frameworks, skills, tools } from "@/lib/contants/skills";
 
 function SkillPill({ name, level }: { name: string; level: string }) {
   const isLearning = level === "learning";
@@ -56,7 +56,6 @@ function BentoCard({
       </div>
 
       <div className="flex flex-wrap gap-2">{children}</div>
-
       <div className="pointer-events-none absolute -right-6 -bottom-6 h-24 w-24 rounded-full bg-purple-500/10 blur-2xl" />
     </motion.div>
   );
@@ -81,7 +80,7 @@ export default function SkillsSection() {
             Technical <span className="text-purple-400">Arsenal</span>
           </motion.h2>
           <p className="mt-4 text-zinc-400">
-            Ferramentas e tecnologias que uso para dar vida às ideias.
+            The tools and technologies I use to bring ideas to life.
           </p>
         </div>
 
@@ -93,8 +92,8 @@ export default function SkillsSection() {
             delay={0.1}
           >
             <p className="w-full text-sm text-zinc-400 mb-4">
-              O coração do meu desenvolvimento front-end e full-stack. Foco em
-              performance e UX.
+              The core of my full-stack development workflow. Focused on
+              performance and UX.
             </p>
             {mainStack.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
@@ -121,7 +120,7 @@ export default function SkillsSection() {
           >
             <div className="flex items-center justify-between w-full">
               <span className="text-sm text-zinc-400">
-                Atualmente expandindo conhecimentos em tecnologias corporativas.
+                Currently expanding my knowledge in enterprise technologies.
               </span>
               <div className="flex gap-2">
                 {learning.map((item) => (

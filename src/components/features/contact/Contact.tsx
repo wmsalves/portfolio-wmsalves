@@ -22,21 +22,21 @@ export default function ContactSection() {
             Let&apos;s work together?
           </h2>
           <p className="text-xl text-zinc-400">
-            Estou sempre aberto a discutir novos projetos, ideias criativas ou
-            oportunidades de fazer parte da sua visão.
+            I&apos;m always open to discussing new projects, creative ideas, or
+            opportunities to be part of your vision.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <a href="mailto:dev.wmsalves@gmail.com">
               <Button className="h-12 px-8 w-full sm:w-auto bg-white text-black hover:bg-zinc-200 border-none">
                 <Mail className="mr-2 h-4 w-4" />
-                Mandar E-mail
+                Send Me an Email
               </Button>
             </a>
           </div>
 
           <p className="text-sm text-zinc-600 pt-8">
-            Ou me encontre nas redes sociais listadas no topo.
+            Or connect with me on the social networks listed above.
           </p>
         </motion.div>
       </div>

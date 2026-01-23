@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect, type ComponentType } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { Home, User, FileText, Layers, Mail, Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
@@ -27,12 +27,18 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   // Detectar scroll para mudar transparência do header
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      
+
       // Lógica do Scroll Spy
       const sections = navItems.map((item) => item.href.substring(1));
       let current = "";
@@ -53,7 +59,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleScrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     e.preventDefault();
     setOpen(false);
     const element = document.querySelector(href);
@@ -75,13 +84,12 @@ export default function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300",
-          scrolled 
+          scrolled
             ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-gray-200 dark:border-white/5 shadow-sm"
-            : "bg-transparent border-transparent"
+            : "bg-transparent border-transparent",
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-          
           {/* Logo */}
           <Link
             href="#home"
@@ -103,9 +111,9 @@ export default function Header() {
                   onClick={(e) => handleScrollTo(e, item.href)}
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-purple-600 dark:hover:text-purple-400",
-                    isActive 
-                      ? "text-purple-600 dark:text-purple-400" 
-                      : "text-gray-600 dark:text-zinc-400"
+                    isActive
+                      ? "text-purple-600 dark:text-purple-400"
+                      : "text-gray-600 dark:text-zinc-400",
                   )}
                 >
                   {item.label}
@@ -128,6 +136,10 @@ export default function Header() {
             </button>
           </div>
         </div>
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[1px] bg-purple-500 origin-left"
+          style={{ scaleX }}
+        />
       </header>
 
       {/* MOBILE DRAWER */}
@@ -159,7 +171,7 @@ export default function Header() {
                   <X size={24} />
                 </button>
               </div>
-              
+
               <nav className="flex flex-col p-4 gap-2">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.href;
@@ -172,7 +184,7 @@ export default function Header() {
                         "flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all",
                         isActive
                           ? "bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300"
-                          : "text-gray-700 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-white/5"
+                          : "text-gray-700 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-white/5",
                       )}
                     >
                       <item.icon size={20} />
@@ -181,11 +193,11 @@ export default function Header() {
                   );
                 })}
               </nav>
-              
+
               <div className="absolute bottom-0 w-full p-6 border-t border-gray-100 dark:border-white/5">
-                 <p className="text-xs text-center text-gray-400 dark:text-zinc-500">
-                    © {new Date().getFullYear()} Wemerson
-                 </p>
+                <p className="text-xs text-center text-gray-400 dark:text-zinc-500">
+                  © {new Date().getFullYear()} Wemerson
+                </p>
               </div>
             </motion.aside>
           </>

@@ -13,30 +13,28 @@ export default function About() {
           className="rounded-3xl border border-white/5 bg-zinc-900/30 p-8 md:p-12 backdrop-blur-sm"
         >
           <div className="grid md:grid-cols-[1fr_200px] gap-8 items-center">
-            {/* Texto */}
             <div className="space-y-6">
               <h2 className="text-3xl font-bold text-white">
                 Beyond the <span className="text-purple-400">Code</span>
               </h2>
               <div className="space-y-4 text-zinc-400 text-lg leading-relaxed">
                 <p>
-                  Sou um desenvolvedor apaixonado por criar interfaces que não
-                  apenas funcionam, mas encantam. Minha jornada começou com
-                  curiosidade e se transformou em uma busca constante pela{" "}
+                  I&apos;m a developer passionate about crafting interfaces that
+                  not only work but delight. My journey started with curiosity
+                  and turned into a constant pursuit of the{" "}
                   <span className="text-zinc-200 font-medium">
-                    arquitetura de software perfeita
+                    perfect software architecture
                   </span>
                   .
                 </p>
                 <p>
-                  Quando não estou debugando ou arquitetando sistemas em
-                  Next.js, você provavelmente vai me encontrar estudando sobre
-                  design patterns, ouvindo música ou apreciando um bom café.
+                  When I&apos;m not debugging or architecting Next.js systems,
+                  you&apos;ll likely find me studying design patterns, listening
+                  to music, or enjoying a good coffee.
                 </p>
               </div>
             </div>
 
-            {/* Stats / Imagem Decorativa (Opcional) */}
             <div className="flex flex-col gap-4">
               <div className="rounded-2xl bg-white/5 p-4 text-center border border-white/5">
                 <span className="block text-3xl font-bold text-white">2+</span>
