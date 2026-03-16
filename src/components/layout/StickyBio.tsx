@@ -21,7 +21,7 @@ export default function StickyBio() {
             Wemerson Alves
           </p>
           <h2 className="font-display mt-2 text-xl font-semibold text-foreground">
-            Full-stack Engineer
+            Full-stack Developer
           </h2>
         </div>
         <span className="rounded-full border border-border/70 bg-surface-2/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">
