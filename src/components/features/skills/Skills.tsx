@@ -1,24 +1,34 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
+import {
+  Database,
+  Globe,
+  Layers,
+  Terminal,
+  type LucideIcon,
+} from "lucide-react";
+import { frameworks, skills, tools } from "@/lib/data/skills";
+import type { SkillLevel } from "@/types";
 import { cn } from "@/lib/utils";
-import { Database, Globe, Layers, Terminal, LucideIcon } from "lucide-react";
-import { frameworks, skills, tools } from "@/lib/contants/skills";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { motionBase, motionViewport } from "@/lib/motion";
 
-function SkillPill({ name, level }: { name: string; level: string }) {
+function SkillPill({ name, level }: { name: string; level: SkillLevel }) {
   const isLearning = level === "learning";
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium border backdrop-blur-sm transition-all duration-300",
+        "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium border backdrop-blur-sm transition-all duration-300",
         isLearning
-          ? "border-amber-500/30 bg-amber-500/10 text-amber-200 hover:border-amber-500/50"
-          : "border-white/10 bg-white/5 text-zinc-300 hover:border-purple-500/30 hover:bg-purple-500/10 hover:text-purple-200",
+          ? "border-primary/30 bg-primary/10 text-primary/90 hover:border-primary/50"
+          : "border-border/70 bg-surface-2/60 text-foreground/80 hover:border-primary/40 hover:bg-primary/10 hover:text-foreground",
       )}
     >
-      {isLearning && (
-        <span className="mr-1.5 flex h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-      )}
+      {isLearning ? (
+        <span className="mr-2 flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+      ) : null}
       {name}
     </span>
   );
@@ -39,61 +49,75 @@ function BentoCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      variants={motionBase.fadeScale}
       transition={{ duration: 0.5, delay }}
-      viewport={{ once: true }}
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-zinc-900/40 p-6 backdrop-blur-md transition-all hover:border-purple-500/20",
+        "group relative flex flex-col rounded-2xl border border-border/60 bg-surface/70 p-6 backdrop-blur-md transition-all hover:border-primary/30",
         className,
       )}
     >
-      <div className="mb-4 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-purple-400">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+      />
+      <div className="relative z-10 mb-4 flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-2 text-primary">
           <Icon size={20} />
         </div>
-        <h3 className="text-lg font-semibold text-zinc-100">{title}</h3>
+        <h3 className="font-display text-lg font-semibold text-foreground">
+          {title}
+        </h3>
       </div>
 
-      <div className="flex flex-wrap gap-2">{children}</div>
-      <div className="pointer-events-none absolute -right-6 -bottom-6 h-24 w-24 rounded-full bg-purple-500/10 blur-2xl" />
+      <div className="relative z-10 flex flex-wrap gap-2">{children}</div>
     </motion.div>
   );
 }
 
 export default function SkillsSection() {
-  const languages = skills.filter((s) => s.name !== "SQL");
-  const learning = skills.filter((s) => s.level === "learning");
+  const languages = skills.filter((skill) => skill.name !== "SQL");
+  const learning = skills.filter((skill) => skill.level === "learning");
   const mainStack = frameworks;
-  const dbAndTools = [...tools, ...skills.filter((s) => s.name === "SQL")];
+  const dbAndTools = [
+    ...tools,
+    ...skills.filter((skill) => skill.name === "SQL"),
+  ];
 
   return (
-    <section id="skills" className="relative py-24 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="mb-16 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl font-bold tracking-tighter text-white sm:text-4xl"
-          >
-            Technical <span className="text-purple-400">Arsenal</span>
-          </motion.h2>
-          <p className="mt-4 text-zinc-400">
-            The tools and technologies I use to bring ideas to life.
-          </p>
-        </div>
+    <Section
+      id="skills"
+      ariaLabelledby="skills-title"
+      className="overflow-hidden"
+    >
+      <motion.div
+        className="relative"
+        initial="hidden"
+        whileInView="show"
+        viewport={motionViewport}
+        variants={motionBase.stagger}
+      >
+        <SectionHeader
+          id="skills-title"
+          eyebrow="Stack"
+          title={
+            <>
+              Technical <span className="text-primary">Toolkit</span>
+            </>
+          }
+          subtitle="The tools and technologies I use to ship reliable, high-performance products."
+          align="left"
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
           <BentoCard
             title="Frameworks & Libraries"
             icon={Layers}
-            className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-zinc-900/60 to-purple-900/10"
+            className="lg:row-span-2"
             delay={0.1}
           >
-            <p className="w-full text-sm text-zinc-400 mb-4">
-              The core of my full-stack development workflow. Focused on
-              performance and UX.
+            <p className="w-full text-sm text-muted mb-4">
+              The core of my full-stack workflow with a focus on performance and
+              UX.
             </p>
             {mainStack.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
@@ -115,14 +139,14 @@ export default function SkillsSection() {
           <BentoCard
             title="Exploring Now"
             icon={Globe}
-            className="md:col-span-3 border-amber-500/10 bg-amber-500/5"
+            className="lg:col-span-2"
             delay={0.4}
           >
-            <div className="flex items-center justify-between w-full">
-              <span className="text-sm text-zinc-400">
+            <div className="flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+              <span className="text-sm text-muted">
                 Currently expanding my knowledge in enterprise technologies.
               </span>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {learning.map((item) => (
                   <SkillPill
                     key={item.name}
@@ -134,7 +158,7 @@ export default function SkillsSection() {
             </div>
           </BentoCard>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </Section>
   );
 }

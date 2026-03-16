@@ -1,11 +1,12 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
-import { useState, useEffect, type ComponentType } from "react";
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { Home, User, FileText, Layers, Mail, Menu, X } from "lucide-react";
+import { useState, useEffect, useMemo, type ComponentType } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Home, User, FileText, Layers, Mail, Menu, X, Briefcase } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
+import { experiences } from "@/lib/data/experiences";
 
 type IconComponent = ComponentType<{ size?: number; className?: string }>;
 
@@ -15,9 +16,9 @@ type NavItem = {
   icon: IconComponent;
 };
 
-const navItems: NavItem[] = [
+const baseNavItems: NavItem[] = [
   { href: "#home", label: "Home", icon: Home },
-  { href: "#projects", label: "Projects", icon: Layers }, // ID Corrigido e Ícone atualizado
+  { href: "#projects", label: "Projects", icon: Layers },
   { href: "#skills", label: "Skills", icon: FileText },
   { href: "#about", label: "About", icon: User },
   { href: "#contact", label: "Contact", icon: Mail },
@@ -26,27 +27,24 @@ const navItems: NavItem[] = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
-  const [scrolled, setScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  const navItems = useMemo(() => {
+    return experiences.length
+      ? [
+          baseNavItems[0],
+          { href: "#experience", label: "Experience", icon: Briefcase },
+          ...baseNavItems.slice(1),
+        ]
+      : baseNavItems;
+  }, []);
 
-  // Detectar scroll para mudar transparência do header
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      // Lógica do Scroll Spy
       const sections = navItems.map((item) => item.href.substring(1));
       let current = "";
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Ajuste fino: considera ativo se estiver no terço superior da tela
           if (rect.top <= 200 && rect.bottom >= 200) {
             current = section;
           }
@@ -57,13 +55,13 @@ export default function Header() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [navItems]);
 
   const handleScrollTo = (
-    e: React.MouseEvent<HTMLAnchorElement>,
+    event: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
-    e.preventDefault();
+    event.preventDefault();
     setOpen(false);
     const element = document.querySelector(href);
     if (element) {
@@ -80,111 +78,98 @@ export default function Header() {
 
   return (
     <>
-      {/* HEADER FIXO */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300",
-          scrolled
-            ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-gray-200 dark:border-white/5 shadow-sm"
-            : "bg-transparent border-transparent",
+          "fixed top-0 left-0 right-0 z-50 h-20 border-b border-border/30 bg-bg/80 backdrop-blur-md",
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
-          {/* Logo */}
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link
             href="#home"
-            onClick={(e) => handleScrollTo(e, "#home")}
-            className="text-2xl font-extrabold tracking-tight"
-          >
-            <span className="text-gray-900 dark:text-zinc-100">Wemerson</span>
-            <span className="text-purple-600">.</span>
+            onClick={(event) => handleScrollTo(event, "#home")}
+          className="text-2xl font-extrabold tracking-tight text-foreground"
+        >
+            wms<span className="text-primary">.</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
             {navItems.map((item) => {
               const isActive = activeSection === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={(e) => handleScrollTo(e, item.href)}
+                  onClick={(event) => handleScrollTo(event, item.href)}
+                  aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-purple-600 dark:hover:text-purple-400",
-                    isActive
-                      ? "text-purple-600 dark:text-purple-400"
-                      : "text-gray-600 dark:text-zinc-400",
+                    "text-sm font-medium transition-colors",
+                    isActive ? "text-primary" : "text-muted hover:text-foreground",
                   )}
                 >
                   {item.label}
                 </Link>
               );
             })}
-            <div className="h-6 w-px bg-gray-200 dark:bg-white/10" />
+            <div className="h-6 w-px bg-border/70" />
             <ThemeToggle />
           </nav>
 
-          {/* Mobile Actions */}
           <div className="flex items-center gap-4 lg:hidden">
             <ThemeToggle />
             <button
+              type="button"
               onClick={() => setOpen(true)}
-              className="p-2 text-gray-600 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-white/5 rounded-md transition-colors"
+              className="rounded-md border border-border/70 p-2 text-muted transition-colors hover:border-primary/40 hover:text-foreground"
               aria-label="Open menu"
             >
-              <Menu size={24} />
+              <Menu size={22} />
             </button>
           </div>
         </div>
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-[1px] bg-purple-500 origin-left"
-          style={{ scaleX }}
-        />
       </header>
 
-      {/* MOBILE DRAWER */}
       <AnimatePresence>
-        {open && (
+        {open ? (
           <>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm lg:hidden"
             />
             <motion.aside
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 right-0 z-[70] w-72 bg-white dark:bg-zinc-950 border-l border-gray-200 dark:border-white/5 shadow-2xl lg:hidden"
+              className="fixed inset-y-0 right-0 z-[70] w-72 border-l border-border/70 bg-bg shadow-2xl lg:hidden"
             >
-              <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-white/5">
-                <span className="font-bold text-lg dark:text-zinc-100">
-                  Menu
-                </span>
+              <div className="flex items-center justify-between border-b border-border/70 p-6">
+                <span className="text-lg font-bold text-foreground">Menu</span>
                 <button
+                  type="button"
                   onClick={() => setOpen(false)}
-                  className="text-gray-500 dark:text-zinc-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                  className="text-muted transition-colors hover:text-primary"
                 >
-                  <X size={24} />
+                  <X size={22} />
                 </button>
               </div>
 
-              <nav className="flex flex-col p-4 gap-2">
+              <nav className="flex flex-col gap-2 p-4" aria-label="Mobile">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.href;
                   return (
                     <Link
                       key={item.href}
                       href={item.href}
-                      onClick={(e) => handleScrollTo(e, item.href)}
+                      onClick={(event) => handleScrollTo(event, item.href)}
+                      aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all",
+                        "flex items-center gap-3 rounded-xl px-4 py-3 font-medium transition-all",
                         isActive
-                          ? "bg-purple-50 text-purple-700 dark:bg-purple-500/10 dark:text-purple-300"
-                          : "text-gray-700 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-white/5",
+                          ? "bg-primary/10 text-foreground"
+                          : "text-muted hover:bg-surface-2",
                       )}
                     >
                       <item.icon size={20} />
@@ -194,14 +179,12 @@ export default function Header() {
                 })}
               </nav>
 
-              <div className="absolute bottom-0 w-full p-6 border-t border-gray-100 dark:border-white/5">
-                <p className="text-xs text-center text-gray-400 dark:text-zinc-500">
-                  © {new Date().getFullYear()} Wemerson
-                </p>
+              <div className="absolute bottom-0 w-full border-t border-border/70 p-6">
+                <p className="text-xs text-muted">(c) {new Date().getFullYear()} Wemerson</p>
               </div>
             </motion.aside>
           </>
-        )}
+        ) : null}
       </AnimatePresence>
     </>
   );

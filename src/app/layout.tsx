@@ -1,13 +1,19 @@
-import "./globals.css";
-import { Poppins } from "next/font/google";
+﻿import "./globals.css";
+import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import Header from "@/components/layout/Header";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 
-const poppins = Poppins({
+const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
 });
 
 export const metadata: Metadata = {
@@ -21,8 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={poppins.variable} suppressHydrationWarning>
-      <body className="font-sans antialiased bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors">
+    <html
+      lang="en"
+      className={`${bodyFont.variable} ${displayFont.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="relative min-h-screen bg-bg text-foreground antialiased">
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{

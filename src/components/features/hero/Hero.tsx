@@ -1,104 +1,182 @@
-"use client";
+﻿"use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Github, Linkedin, LucideIcon } from "lucide-react";
+import { ArrowRight, Github, Linkedin, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Section } from "@/components/ui/Section";
+import { cn } from "@/lib/utils";
+import { experiences } from "@/lib/data/experiences";
+import { motionBase, motionViewport } from "@/lib/motion";
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
+const baseTopics = [
+  { label: "Work", href: "#projects" },
+  { label: "Toolkit", href: "#skills" },
+  { label: "Story", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Hero() {
   return (
-    <section
+    <Section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20"
+      ariaLabelledby="hero-title"
+      className="!py-0 pt-10 pb-14 sm:pt-12 sm:pb-16"
     >
-      {/* Background */}
-      <div className="absolute inset-0 w-full h-full bg-zinc-950">
-        <div className="absolute top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-purple-900/20 blur-[100px] mix-blend-screen animate-pulse" />
-        <div className="absolute bottom-[10%] right-[-5%] h-[600px] w-[600px] rounded-full bg-indigo-900/10 blur-[120px] mix-blend-screen" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-      </div>
-
-      <div className="container relative z-10 mx-auto max-w-5xl px-4 text-center">
+      <div className="relative">
         <motion.div
           initial="hidden"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
-          className="space-y-8"
+          whileInView="show"
+          viewport={motionViewport}
+          variants={motionBase.stagger}
+          className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-start"
         >
-          {/* Badge */}
-          <motion.div variants={fadeUp} className="flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/5 px-4 py-1.5 text-sm font-medium text-purple-300 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+          <div className="flex flex-col gap-5">
+            <motion.div variants={motionBase.fadeUp} className="flex justify-start">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+                Open to new projects
+              </div>
+            </motion.div>
+
+            <motion.h1
+              id="hero-title"
+              variants={motionBase.fadeUp}
+              className="font-display max-w-xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-6xl leading-[1.05]"
+            >
+              Building thoughtful
+              <span className="block bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent">
+                digital products
               </span>
-              Available for new projects
+              with a systems mindset.
+            </motion.h1>
+
+            <motion.p
+              variants={motionBase.fadeUp}
+              className="max-w-xl text-base text-muted sm:text-lg leading-relaxed"
+            >
+              I design, architect, and ship full-stack experiences focused on
+              performance, clarity, and long-term maintainability.
+            </motion.p>
+
+            <motion.div
+              variants={motionBase.fadeUp}
+              className="flex flex-wrap gap-2 -mt-2"
+            >
+              {(experiences.length
+                ? [{ label: "Experience", href: "#experience" }, ...baseTopics]
+                : baseTopics
+              ).map((topic) => (
+                <Link
+                  key={topic.href}
+                  href={topic.href}
+                  className={cn(
+                    "rounded-full border border-border/70 bg-surface/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted transition-colors",
+                    topic.href === "#projects" &&
+                      "border-primary/40 text-foreground",
+                  )}
+                >
+                  {topic.label}
+                </Link>
+              ))}
+            </motion.div>
+
+            <motion.div
+              variants={motionBase.fadeUp}
+              className="flex flex-wrap items-center gap-4"
+            >
+              <Link href="#projects">
+                <Button className="h-12 px-7 text-sm border border-primary/40">
+                  See case studies
+                </Button>
+              </Link>
+              <div className="flex gap-3">
+                <SocialBtn
+                  href="https://github.com/wmsalves"
+                  icon={Github}
+                  label="GitHub Profile"
+                />
+                <SocialBtn
+                  href="https://linkedin.com/in/wmsalves"
+                  icon={Linkedin}
+                  label="LinkedIn Profile"
+                />
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.aside
+            variants={motionBase.fadeUp}
+            className="mt-6 rounded-2xl border border-border/60 bg-surface/70 p-6 backdrop-blur-md lg:mt-10"
+          >
+            <div className="flex flex-col gap-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
+                  Now
+                </p>
+                <h2 className="mt-3 text-2xl font-semibold text-foreground">
+                  Personal sandbox
+                </h2>
+                <p className="mt-3 text-sm text-muted">
+                  A living portfolio focused on experiments, product thinking,
+                  and craft. Built to evolve with new projects and ideas.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-border/70 bg-surface-2/70 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                  Focus
+                </p>
+                <ul className="mt-3 space-y-2 text-sm text-muted">
+                  <li>Performance-first UI systems</li>
+                  <li>Type-safe, composable codebases</li>
+                  <li>Human-centered product decisions</li>
+                </ul>
+              </div>
+
+              <div className="rounded-2xl border border-border/70 bg-surface-2/70 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                  Availability
+                </p>
+                <p className="mt-2 text-sm text-foreground">
+                  Open for select freelance and product partnerships.
+                </p>
+                <Link
+                  href="#contact"
+                  className="mt-3 inline-flex items-center text-sm font-semibold text-primary"
+                >
+                  Start a conversation <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
             </div>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            variants={fadeUp}
-            className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-white"
-          >
-            Architecting <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-              Digital Systems
-            </span>
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            className="mx-auto max-w-2xl text-lg text-zinc-400 md:text-xl leading-relaxed"
-          >
-            Full-stack developer focused on performance and scalability. I build
-            robust solutions where{" "}
-            <span className="text-zinc-100 font-semibold">clean code</span>{" "}
-            meets functional design.
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            className="flex flex-col items-center justify-center gap-4 sm:flex-row pt-6"
-          >
-            <Link href="#projects">
-              <Button className="h-14 px-8 text-base bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] border border-purple-500/50">
-                Explore Work <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-
-            <div className="flex gap-4">
-              <SocialBtn href="https://github.com/wmsalves" icon={Github} />
-              <SocialBtn
-                href="https://linkedin.com/in/wmsalves"
-                icon={Linkedin}
-              />
-            </div>
-          </motion.div>
+          </motion.aside>
         </motion.div>
       </div>
-    </section>
+    </Section>
   );
 }
 
-function SocialBtn({ href, icon: Icon }: { href: string; icon: LucideIcon }) {
+function SocialBtn({
+  href,
+  icon: Icon,
+  label,
+}: {
+  href: string;
+  icon: LucideIcon;
+  label: string;
+}) {
   return (
     <a
       href={href}
       target="_blank"
-      rel="noreferrer"
-      className="p-4 rounded-full border border-zinc-800 bg-zinc-900/50 text-zinc-400 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 backdrop-blur-sm"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-surface/70 text-muted transition-all duration-300 hover:border-primary/50 hover:bg-primary/10 hover:text-foreground"
     >
-      <Icon size={20} />
+      <Icon size={18} />
     </a>
   );
 }

@@ -1,59 +1,72 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
+import { Briefcase, Trophy } from "lucide-react";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { motionBase, motionViewport } from "@/lib/motion";
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24">
-      <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-3xl border border-white/5 bg-zinc-900/30 p-8 md:p-12 backdrop-blur-sm"
-        >
-          <div className="grid md:grid-cols-[1fr_200px] gap-8 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-white">
-                Beyond the <span className="text-purple-400">Code</span>
-              </h2>
-              <div className="space-y-4 text-zinc-400 text-lg leading-relaxed">
-                <p>
-                  I&apos;m a developer passionate about crafting interfaces that
-                  not only work but delight. My journey started with curiosity
-                  and turned into a constant pursuit of the{" "}
-                  <span className="text-zinc-200 font-medium">
-                    perfect software architecture
-                  </span>
-                  .
-                </p>
-                <p>
-                  When I&apos;m not debugging or architecting Next.js systems,
-                  you&apos;ll likely find me studying design patterns, listening
-                  to music, or enjoying a good coffee.
-                </p>
-              </div>
-            </div>
+    <Section id="about" ariaLabelledby="about-title">
+      <motion.div
+        className="mx-auto max-w-5xl"
+        initial="hidden"
+        whileInView="show"
+        viewport={motionViewport}
+        variants={motionBase.stagger}
+      >
+        <SectionHeader
+          id="about-title"
+          eyebrow="Story"
+          title={
+            <>
+              Beyond the <span className="text-primary">Code</span>
+            </>
+          }
+          subtitle="A personal snapshot of how I approach building software and life outside the editor."
+          align="left"
+        />
 
-            <div className="flex flex-col gap-4">
-              <div className="rounded-2xl bg-white/5 p-4 text-center border border-white/5">
-                <span className="block text-3xl font-bold text-white">2+</span>
-                <span className="text-xs text-zinc-500 uppercase tracking-wider">
-                  Years Exp.
-                </span>
+        <motion.div
+          variants={motionBase.fadeUp}
+          className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]"
+        >
+          <div className="group relative rounded-2xl border border-border/60 bg-surface/70 p-8 backdrop-blur-sm md:p-10">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+            />
+            <div className="relative z-10 space-y-5 text-muted text-base leading-relaxed sm:text-lg">
+              <p>
+                I am a developer passionate about crafting interfaces that feel intentional and scale cleanly. My
+                journey started with curiosity and turned into a steady pursuit of resilient architectures.
+              </p>
+              <p>
+                When I am not designing systems, you will likely find me studying design patterns, listening to music,
+                or enjoying a good coffee.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-colors hover:border-primary/40">
+              <div className="mb-3 flex justify-center text-primary">
+                <Briefcase size={24} />
               </div>
-              <div className="rounded-2xl bg-white/5 p-4 text-center border border-white/5">
-                <span className="block text-3xl font-bold text-purple-400">
-                  10+
-                </span>
-                <span className="text-xs text-zinc-500 uppercase tracking-wider">
-                  Projects
-                </span>
+              <span className="block text-3xl font-bold text-foreground mb-1">2+</span>
+              <span className="text-xs uppercase tracking-wider text-muted">Years Exp.</span>
+            </div>
+            <div className="rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-colors hover:border-primary/40">
+              <div className="mb-3 flex justify-center text-primary">
+                <Trophy size={24} />
               </div>
+              <span className="block text-3xl font-bold text-foreground mb-1">10+</span>
+              <span className="text-xs uppercase tracking-wider text-muted">Projects</span>
             </div>
           </div>
         </motion.div>
-      </div>
-    </section>
+      </motion.div>
+    </Section>
   );
 }

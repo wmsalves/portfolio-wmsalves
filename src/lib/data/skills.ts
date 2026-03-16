@@ -1,4 +1,4 @@
-import { SkillItem } from "@/types";
+﻿import type { SkillItem } from "@/types";
 
 export const skills: SkillItem[] = [
   { name: "JavaScript", level: "experienced" },

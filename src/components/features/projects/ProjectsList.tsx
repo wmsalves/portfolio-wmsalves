@@ -1,51 +1,40 @@
-"use client";
-import { projects } from "@/lib/contants/project";
+﻿"use client";
+
 import { motion } from "framer-motion";
+import { projects } from "@/lib/data/projects";
 import { ProjectCard } from "./ProjectsCard";
+import { Section } from "@/components/ui/Section";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { motionBase, motionViewport } from "@/lib/motion";
 
 export default function ProjectList() {
   return (
-    <section id="projects" className="relative py-24 sm:py-32 overflow-hidden">
-      {/* Background Glow Localizado */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-purple-900/10 blur-[120px] rounded-full pointer-events-none" />
+    <Section id="projects" ariaLabelledby="projects-title" className="overflow-hidden">
+      <motion.div
+        className="relative"
+        initial="hidden"
+        whileInView="show"
+        viewport={motionViewport}
+        variants={motionBase.stagger}
+      >
+        <SectionHeader
+          id="projects-title"
+          eyebrow="Selected"
+          title={
+            <>
+              Featured <span className="text-primary">Projects</span>
+            </>
+          }
+          subtitle="A curated selection of work spanning product UX, backend systems, and end-to-end delivery."
+          align="left"
+        />
 
-      <div className="container relative z-10 mx-auto px-4 md:px-6">
-        {/* Cabeçalho da Seção */}
-        <div className="mb-16 md:mb-24 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
-          >
-            Featured{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-              Projects
-            </span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mx-auto mt-4 max-w-[600px] text-zinc-400 md:text-lg"
-          >
-            A selection of my favorite works, ranging from web applications to
-            backend systems.
-          </motion.p>
-        </div>
-
-        {/* Grid de Cards */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div className="grid grid-cols-1 gap-8 md:grid-cols-2" variants={motionBase.stagger}>
           {projects.map((project, index) => (
-            <ProjectCard
-              key={project.slug || project.title}
-              project={project}
-              index={index}
-            />
+            <ProjectCard key={project.slug} project={project} index={index} />
           ))}
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </Section>
   );
 }

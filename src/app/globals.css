@@ -1,25 +1,124 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --bg: #eef4fb;
+  --surface: #f7fbff;
+  --surface-2: #e3edf8;
+  --foreground: #0b1220;
+  --muted: #5f6f86;
+  --border: #d2deee;
+  --primary: #0ea5e9;
+  --primary-2: #38bdf8;
+  --primary-foreground: #0b0c0f;
+  --ring: #f97316;
+  --radius-xl: 24px;
+}
+
+.dark {
+  --bg: #0b1220;
+  --surface: #0f172a;
+  --surface-2: #111827;
+  --foreground: #e2e8f0;
+  --muted: #94a3b8;
+  --border: #1f2937;
+  --primary: #38bdf8;
+  --primary-2: #0ea5e9;
+  --primary-foreground: #0b0c0f;
+  --ring: #f97316;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-2: var(--primary-2);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ring: var(--ring);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-poppins), sans-serif;
-  @apply bg-zinc-950 text-zinc-100 antialiased selection:bg-purple-500/30 selection:text-purple-200;
+  font-family: var(--font-body), sans-serif;
+  @apply text-foreground antialiased selection:bg-primary/20 selection:text-foreground;
+  background: transparent;
 }
 
-/* EFEITO DE RUÍDO (NOISE) */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+html {
+  background-color: var(--bg);
+}
+
+html {
+  position: relative;
+}
+
+html::before,
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+html::before {
+  z-index: -2;
+  background:
+    radial-gradient(1200px 700px at 6% -12%, rgba(14, 165, 233, 0.22), transparent 60%),
+    radial-gradient(980px 620px at 92% -10%, rgba(56, 189, 248, 0.2), transparent 58%),
+    radial-gradient(720px 520px at 55% 6%, rgba(99, 102, 241, 0.12), transparent 62%),
+    conic-gradient(from 220deg at 20% 20%, rgba(14, 165, 233, 0.06), transparent 30%, rgba(56, 189, 248, 0.05) 55%, transparent 75%),
+    linear-gradient(180deg, #ecf4ff 0%, #e4eefb 45%, #d9e6f6 100%);
+}
+
+.dark html::before {
+  background:
+    radial-gradient(900px 520px at 12% -10%, rgba(56, 189, 248, 0.16), transparent 60%),
+    radial-gradient(800px 520px at 90% -8%, rgba(99, 102, 241, 0.18), transparent 55%),
+    radial-gradient(520px 380px at 60% 10%, rgba(16, 185, 129, 0.08), transparent 60%),
+    radial-gradient(700px 420px at 30% 18%, rgba(59, 130, 246, 0.12), transparent 62%),
+    linear-gradient(180deg, #09101c 0%, #0b1524 45%, #0d1a2d 100%);
+}
+
+html::after {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 30% 30%, rgba(148, 163, 184, 0.08) 1px, transparent 2px),
+    radial-gradient(circle at 70% 20%, rgba(148, 163, 184, 0.08) 1px, transparent 2px),
+    radial-gradient(circle at 20% 70%, rgba(148, 163, 184, 0.06) 1px, transparent 2px),
+    radial-gradient(circle at 80% 80%, rgba(148, 163, 184, 0.06) 1px, transparent 2px);
+  background-size: 56px 56px, 56px 56px, 220px 220px, 260px 260px, 240px 240px, 300px 300px;
+}
+
+html::after {
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px, 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 30%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 30%, #000 60%, transparent 100%);
+}
+
+/* NOISE OVERLAY */
 .bg-noise {
   position: fixed;
   top: 0;
@@ -30,19 +129,4 @@ body {
   z-index: 50;
   opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* SCROLLBAR DARK */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #09090b;
-}
-::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
 }
