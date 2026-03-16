@@ -116,8 +116,11 @@ export default function SkillsSection() {
             delay={0.1}
           >
             <p className="w-full text-sm text-muted mb-4">
-              The core of my full-stack workflow with a focus on performance and
-              UX.
+              Core tools in my full-stack workflow used to build modern,
+              scalable, and high-performance web applications. I focus on
+              technologies that enable efficient development, clean
+              architecture, and maintainable codebases while delivering
+              responsive and reliable user experiences.
             </p>
             {mainStack.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
@@ -144,7 +147,8 @@ export default function SkillsSection() {
           >
             <div className="flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <span className="text-sm text-muted">
-                Currently expanding my knowledge in enterprise technologies.
+                Currently expanding my knowledge in enterprise technologies and
+                building scalable, production-ready systems.
               </span>
               <div className="flex flex-wrap gap-2">
                 {learning.map((item) => (
