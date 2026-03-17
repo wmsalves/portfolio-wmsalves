@@ -58,7 +58,7 @@ function BentoCard({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+        className="rounded-2xl pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
       />
       <div className="relative z-10 mb-4 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-2 text-primary">

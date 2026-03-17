@@ -23,9 +23,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.18),transparent_55%)]"
+        className="rounded-2xl pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.18),transparent_55%)]"
       />
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface-2">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-surface-2 rounded-2xl">
         <a
           href={project.link}
           target="_blank"

@@ -32,7 +32,10 @@ export default function Hero() {
           className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-start"
         >
           <div className="flex flex-col gap-5">
-            <motion.div variants={motionBase.fadeUp} className="flex justify-start">
+            <motion.div
+              variants={motionBase.fadeUp}
+              className="flex justify-start"
+            >
               <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
@@ -110,7 +113,7 @@ export default function Hero() {
 
           <motion.aside
             variants={motionBase.fadeUp}
-            className="mt-6 rounded-2xl border border-border/60 bg-surface/70 p-6 backdrop-blur-md lg:mt-10"
+            className="mt-6 rounded-2xl border border-border/60 bg-surface/70 p-6 backdrop-blur-md lg:mt-8"
           >
             <div className="flex flex-col gap-5">
               <div>

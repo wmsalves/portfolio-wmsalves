@@ -1,12 +1,22 @@
 ﻿"use client";
 
 import Link from "next/link";
-import { useState, useEffect, useMemo, type ComponentType } from "react";
+import { useState, useMemo, type ComponentType } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Home, User, FileText, Layers, Mail, Menu, X, Briefcase } from "lucide-react";
+import {
+  Home,
+  User,
+  FileText,
+  Layers,
+  Mail,
+  Menu,
+  X,
+  Briefcase,
+} from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { experiences } from "@/lib/data/experiences";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
 type IconComponent = ComponentType<{ size?: number; className?: string }>;
 
@@ -26,7 +36,8 @@ const baseNavItems: NavItem[] = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("#home");
+
+  // ✅ Primeiro define navItems
   const navItems = useMemo(() => {
     return experiences.length
       ? [
@@ -37,25 +48,8 @@ export default function Header() {
       : baseNavItems;
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map((item) => item.href.substring(1));
-      let current = "";
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
-            current = section;
-          }
-        }
-      }
-      if (current) setActiveSection(`#${current}`);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [navItems]);
+  // ✅ Depois usa no hook
+  const activeSection = useActiveSection(navItems.map((item) => item.href));
 
   const handleScrollTo = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -63,6 +57,7 @@ export default function Header() {
   ) => {
     event.preventDefault();
     setOpen(false);
+
     const element = document.querySelector(href);
     if (element) {
       const headerOffset = 80;
@@ -78,23 +73,25 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 h-20 border-b border-border/30 bg-bg/80 backdrop-blur-md",
-        )}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-bg/80 backdrop-blur-md">
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Logo */}
           <Link
             href="#home"
             onClick={(event) => handleScrollTo(event, "#home")}
-          className="text-2xl font-extrabold tracking-tight text-foreground"
-        >
+            className="text-2xl font-extrabold tracking-tight text-foreground"
+          >
             wms<span className="text-primary">.</span>
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+          {/* Desktop Nav */}
+          <nav
+            className="hidden items-center gap-8 lg:flex"
+            aria-label="Primary"
+          >
             {navItems.map((item) => {
               const isActive = activeSection === item.href;
+
               return (
                 <Link
                   key={item.href}
@@ -103,17 +100,21 @@ export default function Header() {
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "text-sm font-medium transition-colors",
-                    isActive ? "text-primary" : "text-muted hover:text-foreground",
+                    isActive
+                      ? "text-primary"
+                      : "text-muted hover:text-foreground",
                   )}
                 >
                   {item.label}
                 </Link>
               );
             })}
+
             <div className="h-6 w-px bg-border/70" />
             <ThemeToggle />
           </nav>
 
+          {/* Mobile Button */}
           <div className="flex items-center gap-4 lg:hidden">
             <ThemeToggle />
             <button
@@ -128,8 +129,9 @@ export default function Header() {
         </div>
       </header>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
-        {open ? (
+        {open && (
           <>
             <motion.div
               initial={{ opacity: 0 }}
@@ -138,6 +140,7 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm lg:hidden"
             />
+
             <motion.aside
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -159,6 +162,7 @@ export default function Header() {
               <nav className="flex flex-col gap-2 p-4" aria-label="Mobile">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.href;
+
                   return (
                     <Link
                       key={item.href}
@@ -180,11 +184,13 @@ export default function Header() {
               </nav>
 
               <div className="absolute bottom-0 w-full border-t border-border/70 p-6">
-                <p className="text-xs text-muted">(c) {new Date().getFullYear()} Wemerson</p>
+                <p className="text-xs text-muted">
+                  (c) {new Date().getFullYear()} Wemerson
+                </p>
               </div>
             </motion.aside>
           </>
-        ) : null}
+        )}
       </AnimatePresence>
     </>
   );
