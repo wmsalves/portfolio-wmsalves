@@ -18,7 +18,7 @@ export default function ContactSection() {
       >
         <div
           aria-hidden="true"
-          className="rounded-2xl pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+          className="rounded-2xl pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(ellipse_100%_100%_at_50%_0%,rgba(56,189,248,0.18),transparent)]"
         />
         <div className="relative z-10 mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
           <Mail size={30} />

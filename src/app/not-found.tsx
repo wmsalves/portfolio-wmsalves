@@ -11,7 +11,9 @@ export default function NotFound() {
         not exist or has been moved.
       </p>
       <Link href="/" className="mt-8">
-        <Button variant="primary">Back to Base</Button>
+        <Button className="h-12 px-7 text-sm border border-primary/40">
+          Back to base
+        </Button>
       </Link>
     </div>
   );
