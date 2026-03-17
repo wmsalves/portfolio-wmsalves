@@ -1,76 +1,86 @@
 # Developer Portfolio (Next.js + TypeScript + Tailwind)
 
-A clean, modern, and fully responsive personal portfolio built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **Framer Motion**.  
-It ships with a **persisted Dark Mode** (mobile & desktop), **brand color tokens**, and an accessible UI.
+A clean, modern, and fully responsive personal portfolio built with **Next.js (App Router)**, **TypeScript**,**React 19**, **Tailwind CSS v4**, and **Framer Motion**.  
+It ships with a **persisted Dark Mode** (mobile & desktop), custom **color tokens**, and an accessible UI.
 
 ---
 
 ## ✨ Features
 
-- **Pages:** Home, About, Skills (resume), Portfolio, Contact  
-- **Dark Mode:** toggle with `localStorage` and `prefers-color-scheme` fallback  
-- **Brand Tokens:** consistent purple palette via Tailwind v4 `@theme`  
-- **Responsive Layout:** desktop sidebar + mobile topbar with animated drawer  
-- **Accessibility:** keyboard-focus styles, ARIA labels, ESC/backdrop to close drawer  
-- **Animations:** subtle section reveals with Framer Motion  
-- **TypeScript-first:** typed data for skills and projects  
-- **Conventional Commits:** simple, consistent commit history
+- **Single Page Architecture:** Smooth scroll navigation with an active section observer (Scroll Spy).
+- **Dark Mode:** System preference detection with `localStorage` ersistence and an anti-flicker initialization script. 
+- **Tailwind v4 Engine:** Leverages the new `@theme` block for modern CSS variable-based design tokens.
+- **Responsive Layout:** Mobile-optimized navigation with an animated drawer and a glassmorphism sticky header.
+- **Accessibility:** Semantic HTML, ARIA labels, and `focus-visible` states for keyboard navigation.
+- **Micro-interactions:** Staggered list reveals, hover-reactive cards, and fluid section transitions via Framer Motion.
+- **Data-Driven:** Centralized content management for projects, skills, and professional experience.
 
 ---
 
 ## 🧱 Tech Stack
 
-- **Framework:** Next.js (App Router), React 18, TypeScript  
-- **Styling:** Tailwind CSS **v4**, CSS variables, brand tokens  
-- **Animation:** Framer Motion  
-- **Icons:** `lucide-react`, `react-icons`  
-- **Images:** `next/image` (optimized)  
-- **Font:** Google Fonts (Poppins via `next/font`)
+- **Framework:** Next.js 15 (App Router) & React 19
+- **Styling:** Tailwind CSS v4 (with PostCSS)
+- **Animation:** Framer Motion (Optimized variants)
+- **Icons:** Lucide React & React Icons
+- **Type Safety:** TypeScript strict mode
+- **Fonts:** IBM Plex Sans (Body) & Space Grotesk (Display) via `next/font`
 
 ---
 
 ## 📁 Project Structure
 
 ```txt
-src/
-  app/
-    layout.tsx            # Root layout (font, sidebar, theme classes)
-    page.tsx              # Home
-    about/page.tsx        # About page
-    skills/page.tsx       # Skills/Resume page
-    portfolio/page.tsx    # Projects page
-    contact/page.tsx      # Contact page
-
-  components/
-    layout/
-      Sidebar.tsx
-    sections/
-      about/About.tsx
-      skills/Skills.tsx
-      project/Projects.tsx
-      contact/Contact.tsx
-      contact/ContactForm.tsx
-      contact/ContactSocials.tsx
-    ui/
-      ThemeToggle.tsx
-
-  lib/
-    constants/
-      skills.ts           # typed SkillItem[] (languages, frameworks, tools)
-      project.ts          # typed Project[] (title, description, link, image, tags)
-
-public/
-  images/
-    ProfilePhoto.JPG
-    BeWear.png
+    ├── README.md
+    ├── eslint.config.mjs
+    ├── next.config.ts
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── tsconfig.json
+    └── src/
+        ├── app/
+        │   ├── globals.css           # Tailwind v4 setup + custom design tokens
+        │   ├── layout.tsx            # Root layout with Theme Script (Anti-Flicker)
+        │   ├── not-found.tsx         # Custom 404 page (Hyperspace theme)
+        │   └── page.tsx              # Home (Single Page Assemble)
+        ├── components/
+        │   ├── features/             # Business components (Page Sections)
+        │   │   ├── about/
+        │   │   ├── contact/
+        │   │   ├── experience/
+        │   │   ├── hero/
+        │   │   ├── projects/         # Project listing and cards
+        │   │   └── skills/           # Technical toolkit bento-grid
+        │   ├── layout/               # Structural components
+        │   │   ├── Footer.tsx
+        │   │   ├── Header.tsx        # Fixed Navbar with Scroll Spy
+        │   │   └── StickyBio.tsx     # Dynamic sidebar widget (Desktop)
+        │   └── ui/                   # Base UI components (Design System)
+        │       ├── Button.tsx
+        │       ├── Container.tsx
+        │       ├── Section.tsx
+        │       ├── SectionHeader.tsx
+        │       └── ThemeToggle.tsx
+        ├── hooks/
+        │   ├── useActiveSection.ts   # Scroll observer for active navigation
+        │   └── useScrollSpy.ts       # Hook for position monitoring
+        ├── lib/
+        │   ├── motion.ts             # Global Framer Motion variants and presets
+        │   ├── utils.ts              # 'cn' helper for Tailwind Merge
+        │   └── data/                 # Dynamic content and constants
+        │       ├── experiences.ts
+        │       ├── projects.ts
+        │       └── skills.ts
+        └── types/
+            ├── global.d.ts
+            └── index.ts              # Global interfaces (Project, Experience, Skill)
 ```
-
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js **18+** (LTS recommended)
+- Node.js 18.17+ (LTS recommended)
 - npm / pnpm / yarn
 
 ### Install
@@ -97,127 +107,53 @@ npm run lint
 
 ---
 
-## 🔤 Font (Poppins)
+## 🔤 Typography & Design Tokens
 
-**`app/layout.tsx`**
-```tsx
-import { Poppins } from "next/font/google";
+The project uses two primary fonts configured via CSS variables in layout.tsx:
+- **Body:** `IBM Plex Sans (--font-body)`
+- **Display:** `Space Grotesk (--font-display)`
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+The colors and tokens are managed within the Tailwind v4 `@theme` block in `globals.css:`
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className={poppins.variable}>
-      <body className="antialiased bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
-        {/* Sidebar + main */}
-        {children}
-      </body>
-    </html>
-  );
-}
-```
-
-**`src/app/globals.css`** (optional global font)
 ```css
-:root { font-family: var(--font-poppins), system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  /* ... */
+}
 ```
 
 ---
 
 ## 🌙 Dark Mode
 
-- The `ThemeToggle` toggles the `dark` class on `<html>`; selection is persisted in `localStorage`.
-- Each page uses a **full-width wrapper** with paired colors:
-  - `bg-gray-50 dark:bg-gray-950` on the wrapper
-  - inner content constrained by `max-w-6xl` (or similar)
-- Cards/inputs/buttons include `dark:` variants for text, border, background and focus rings.
-
-Example wrapper:
-```tsx
-<section className="w-full bg-gray-50 dark:bg-gray-950 transition-colors">
-  <div className="max-w-6xl mx-auto px-6 py-16">{/* content */}</div>
-</section>
-```
+- **Anti-Flicker**: An inline script in `app/layout.tsx` detects the saved theme or system preference before hydration to prevent a "white flash".
+- **ThemeToggle:** A client-side component that switches the `.dark` class on the `<html>` element.
 
 ---
 
 ## 🖼️ Images
 
-- Place files in `public/images`
-- Refer with a leading slash:
+- Place all images in`public/images`
+- Access them using absolute paths:
 ```tsx
 import Image from "next/image";
 
-<Image src="/images/BeWear.png" alt="BeWear" width={1200} height={630} priority />
+<Image src="/images/project-name.png" alt="Project Name" width={1200} height={630} />
 ```
-
----
-
-## 🔗 Data (Projects & Skills)
-
-**`src/lib/constants/project.ts`**
-```ts
-export type Project = {
-  title: string;
-  description: string;
-  link: string;
-  image?: string;
-  tags?: string[];
-  slug?: string;
-};
-
-export const projects: Project[] = [
-  {
-    title: "Portfolio Website",
-    description: "This portfolio built with Next.js, TypeScript, Tailwind and Framer Motion.",
-    link: "https://github.com/wmsalves",
-    image: "/images/BeWear.png",
-    tags: ["Next.js","Tailwind","Framer Motion"]
-  }
-];
-```
-
-**`src/lib/constants/skills.ts`**  
-Grouped by **Languages**, **Frameworks**, **Tools** with a `level` union (`"proficient" | "experienced" | "familiar" | "learning"`).  
-Badges render as **Worked**, **Familiar**, **Learning**.
-
----
-
-## 🧭 Navigation
-
-- **Desktop:** left **Sidebar**  
-- **Mobile:** top bar + **animated drawer** (ESC and backdrop close)
-- Active links use brand colors and icon pills; focus-visible rings for keyboard users.
-
----
-
-## ♿ Accessibility
-
-- `focus-visible` rings, labeled icon buttons, ARIA attributes on drawer controls, and good contrast in light/dark modes.
-
----
-
-## 🧪 Troubleshooting
-
-- **Hydration mismatch / `<script>` inside `<html>`:** don’t inject raw `<script>` under `<html>`.  
-  Theme is handled by a client component (`ThemeToggle`) that toggles the `dark` class safely.
-- **Light gutters around content:** apply `bg-*` to a full-width wrapper and constrain content inside.
-- **Image 404:** image paths must start with `/images/...` when assets live in `public/images`.
 
 ---
 
 ## 📏 Commit Convention
 
-Use **Conventional Commits**:
+This project follows **Conventional Commits**:
 ```
-feat: add skills grid with badges
-fix(about): move background to wrapper to avoid light gutters
-style(portfolio): apply dark variants to cards and tags
-chore: rename contants to constants
+feat: A new feature
+fix(about): A bug fix
+style(portfolio): Visual changes (CSS, layout) without logic changes
+refactor: Code changes that neither fix a bug nor add a feature
+chore: Maintenance tasks (dependencies, config)
 ```
 
 ---
