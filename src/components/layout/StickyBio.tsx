@@ -1,50 +1,26 @@
 ﻿"use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  CalendarClock,
-  MapPin,
-  Sparkles,
-  Home,
-  Layers,
-  FileText,
-} from "lucide-react";
+import { CalendarClock, MapPin, Sparkles, Home, Layers, FileText } from "lucide-react";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 type SectionKey = "#home" | "#projects" | "#skills";
 
-const sectionContent: Record<SectionKey, string[]> = {
-  "#home": [
-    "Welcome — this is where everything starts.",
-    "Scroll to explore my work and mindset.",
-  ],
-  "#projects": [
-    "A selection of projects focused on quality.",
-    "Built with scalability and real-world usage in mind.",
-  ],
-  "#skills": [
-    "A toolkit shaped by practical experience.",
-    "Always evolving with new technologies.",
-  ],
-};
-
-const sectionIcons: Record<
-  SectionKey,
-  React.ComponentType<{ size?: number; className?: string }>
-> = {
+const sectionIcons: Record<SectionKey, React.ComponentType<{ size?: number; className?: string }>> = {
   "#home": Home,
   "#projects": Layers,
   "#skills": FileText,
 };
 
 export default function StickyBio() {
-  const activeSection = useActiveSection([
-    "#home",
-    "#projects",
-    "#skills",
-  ]) as SectionKey;
+  const { t } = useLanguage();
+  const activeSection = useActiveSection(["#home", "#projects", "#skills"]) as SectionKey;
 
   const Icon = sectionIcons[activeSection] || Sparkles;
+
+  const sectionKey = activeSection.replace("#", "") as "home" | "projects" | "skills";
+  const insights = (t(`sticky.insights.${sectionKey}`) as string[]) || [];
 
   return (
     <aside className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface/80 p-6 backdrop-blur-md">
@@ -55,12 +31,8 @@ export default function StickyBio() {
 
       <div className="relative z-10 flex items-center justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-            Wemerson Alves
-          </p>
-          <h2 className="font-display mt-2 text-xl font-semibold text-foreground">
-            Full-stack Developer
-          </h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">Wemerson Alves</p>
+          <h2 className="font-display mt-2 text-xl font-semibold text-foreground">{t("sticky.role")}</h2>
         </div>
         <span className="rounded-full border border-border/70 bg-surface-2/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">
           {new Date().getFullYear()}
@@ -70,30 +42,22 @@ export default function StickyBio() {
       <div className="relative z-10 mt-6 space-y-3 text-sm text-muted">
         <div className="flex items-center gap-2">
           <MapPin size={14} className="text-primary" />
-          Belo Horizonte, Brazil
+          {t("sticky.location")}
         </div>
         <div className="flex items-center gap-2">
           <CalendarClock size={14} className="text-primary" />
-          Open for select projects
+          {t("sticky.open")}
         </div>
       </div>
 
       <div className="relative z-10 mt-6 rounded-2xl border border-border/70 bg-surface-2/70 p-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          Now
-        </p>
-        <p className="mt-2 text-sm text-foreground">
-          Building a personal system of case studies, experiments, and product
-          notes.
-        </p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{t("sticky.now")}</p>
+        <p className="mt-2 text-sm text-foreground">{t("sticky.nowText")}</p>
       </div>
 
       <div className="relative z-10 mt-4 rounded-2xl border border-border/70 bg-surface-2/70 p-4">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-            Active
-          </p>
-
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{t("sticky.active")}</p>
           <Icon size={14} className="text-primary" />
         </div>
 
@@ -103,14 +67,14 @@ export default function StickyBio() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="mt-2 space-y-2 will-change-transform"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-              Exploring {activeSection.replace("#", "")}
+              {t("sticky.exploring", { section: t(`sticky.sections.${sectionKey}`) })}
             </p>
 
-            {sectionContent[activeSection].map((insight) => (
+            {insights.map((insight) => (
               <p key={insight} className="text-sm text-foreground">
                 {insight}
               </p>

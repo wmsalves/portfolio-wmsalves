@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { motionBase, motionViewport } from "@/lib/motion";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 interface ProjectCardProps {
   project: Project;
@@ -12,6 +13,8 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
+  const { language, t } = useLanguage();
+
   return (
     <motion.article
       variants={motionBase.fadeUp}
@@ -30,7 +33,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Open ${project.title} repository`}
+          aria-label={t("projects.openRepo", { title: project.title })}
           className="block h-full w-full"
         >
           <Image
@@ -58,14 +61,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border border-border/70 p-2 text-muted transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
-            aria-label={`View ${project.title}`}
+            aria-label={t("projects.viewProject", { title: project.title })}
           >
             <ArrowUpRight size={20} />
           </a>
         </div>
 
         <p className="mt-4 mb-6 line-clamp-3 text-base text-muted leading-relaxed">
-          {project.description}
+          {project.description[language]}
         </p>
 
         <div className="mt-auto flex flex-wrap gap-2">

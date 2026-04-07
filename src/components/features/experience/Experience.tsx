@@ -5,8 +5,10 @@ import { experiences } from "@/lib/data/experiences";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motionBase, motionViewport } from "@/lib/motion";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ExperienceSection() {
+  const { t } = useLanguage();
   if (experiences.length === 0) return null;
 
   return (
@@ -20,13 +22,13 @@ export default function ExperienceSection() {
       >
         <SectionHeader
           id="experience-title"
-          eyebrow="Journey"
+          eyebrow={t("experience.eyebrow")}
           title={
             <>
-              Professional <span className="text-primary">Experience</span>
+              {t("experience.title")} <span className="text-primary">{t("experience.titleAccent")}</span>
             </>
           }
-          subtitle="Roles and initiatives where I shipped impactful, user-focused software."
+          subtitle={t("experience.subtitle")}
           align="left"
         />
 
@@ -40,9 +42,7 @@ export default function ExperienceSection() {
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">
-                    {experience.role}
-                  </h3>
+                  <h3 className="text-xl font-semibold text-foreground">{experience.role}</h3>
                   <p className="text-sm text-muted">
                     {experience.company}
                     {experience.location ? ` • ${experience.location}` : ""}
@@ -53,9 +53,7 @@ export default function ExperienceSection() {
                 </span>
               </div>
 
-              <p className="mt-4 text-base text-muted leading-relaxed">
-                {experience.summary}
-              </p>
+              <p className="mt-4 text-base text-muted leading-relaxed">{experience.summary}</p>
 
               {experience.highlights.length > 0 ? (
                 <ul className="mt-4 space-y-2 text-sm text-muted">

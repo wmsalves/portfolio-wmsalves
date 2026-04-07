@@ -5,8 +5,11 @@ import { Briefcase, Trophy } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motionBase, motionViewport } from "@/lib/motion";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function About() {
+  const { t } = useLanguage();
+
   return (
     <Section id="about" ariaLabelledby="about-title">
       <motion.div
@@ -18,78 +21,43 @@ export default function About() {
       >
         <SectionHeader
           id="about-title"
-          eyebrow="Story"
+          eyebrow={t("about.eyebrow")}
           title={
             <>
-              Beyond the <span className="text-primary">Code</span>
+              {t("about.title")} <span className="text-primary">{t("about.titleAccent")}</span>
             </>
           }
-          subtitle="A personal snapshot of how I approach building software and life outside the editor."
+          subtitle={t("about.subtitle")}
           align="left"
         />
 
-        <motion.div
-          variants={motionBase.fadeUp}
-          className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]"
-        >
-          {/* CARD PRINCIPAL */}
-          <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface/70 p-8 backdrop-blur-sm md:p-10">
+        <motion.div variants={motionBase.fadeUp} className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+          <div className="group relative rounded-2xl border border-border/60 bg-surface/70 p-8 backdrop-blur-sm md:p-10">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+              className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
             />
             <div className="relative z-10 space-y-5 text-muted text-base leading-relaxed sm:text-lg">
-              <p>
-                I am a developer passionate about crafting interfaces that feel
-                intentional and scale cleanly. My journey started with curiosity
-                and turned into a steady pursuit of resilient architectures.
-              </p>
-              <p>
-                When I am not designing systems, you will likely find me
-                studying design patterns, listening to music, or enjoying a good
-                coffee.
-              </p>
+              {(t("about.paragraphs") as string[]).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
 
-          {/* CARDS LATERAIS */}
           <div className="flex flex-col gap-4">
-            {/* YEARS */}
-            <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-all duration-300 hover:scale-[1.02] hover:border-primary/40">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
-              />
-              <div className="relative z-10">
-                <div className="mb-3 flex justify-center text-primary">
-                  <Briefcase size={24} />
-                </div>
-                <span className="block text-3xl font-bold text-foreground mb-1">
-                  2+
-                </span>
-                <span className="text-xs uppercase tracking-wider text-muted">
-                  Years Exp.
-                </span>
+            <div className="rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-colors hover:border-primary/40">
+              <div className="mb-3 flex justify-center text-primary">
+                <Briefcase size={24} />
               </div>
+              <span className="block text-3xl font-bold text-foreground mb-1">2+</span>
+              <span className="text-xs uppercase tracking-wider text-muted">{t("about.yearsExp")}</span>
             </div>
-
-            {/* PROJECTS */}
-            <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-all duration-300 hover:scale-[1.02] hover:border-primary/40">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
-              />
-              <div className="relative z-10">
-                <div className="mb-3 flex justify-center text-primary">
-                  <Trophy size={24} />
-                </div>
-                <span className="block text-3xl font-bold text-foreground mb-1">
-                  10+
-                </span>
-                <span className="text-xs uppercase tracking-wider text-muted">
-                  Projects
-                </span>
+            <div className="rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-colors hover:border-primary/40">
+              <div className="mb-3 flex justify-center text-primary">
+                <Trophy size={24} />
               </div>
+              <span className="block text-3xl font-bold text-foreground mb-1">10+</span>
+              <span className="text-xs uppercase tracking-wider text-muted">{t("about.projects")}</span>
             </div>
           </div>
         </motion.div>

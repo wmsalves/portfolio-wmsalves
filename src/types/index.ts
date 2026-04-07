@@ -1,6 +1,11 @@
+export type LocalizedText = {
+  en: string;
+  "pt-BR": string;
+};
+
 export type Project = {
   title: string;
-  description: string;
+  description: LocalizedText;
   link: string;
   image: string;
   tags: string[];

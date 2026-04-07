@@ -1,22 +1,14 @@
 ﻿"use client";
 
 import Link from "next/link";
-import { useState, useMemo, type ComponentType } from "react";
+import { useState, useEffect, useMemo, type ComponentType } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Home,
-  User,
-  FileText,
-  Layers,
-  Mail,
-  Menu,
-  X,
-  Briefcase,
-} from "lucide-react";
+import { Home, User, FileText, Layers, Mail, Menu, X, Briefcase } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 import { cn } from "@/lib/utils";
 import { experiences } from "@/lib/data/experiences";
-import { useActiveSection } from "@/hooks/useActiveSection";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 type IconComponent = ComponentType<{ size?: number; className?: string }>;
 
@@ -27,29 +19,47 @@ type NavItem = {
 };
 
 const baseNavItems: NavItem[] = [
-  { href: "#home", label: "Home", icon: Home },
-  { href: "#projects", label: "Projects", icon: Layers },
-  { href: "#skills", label: "Skills", icon: FileText },
-  { href: "#about", label: "About", icon: User },
-  { href: "#contact", label: "Contact", icon: Mail },
+  { href: "#home", label: "home", icon: Home },
+  { href: "#projects", label: "projects", icon: Layers },
+  { href: "#skills", label: "skills", icon: FileText },
+  { href: "#about", label: "about", icon: User },
+  { href: "#contact", label: "contact", icon: Mail },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
+  const { t } = useLanguage();
 
-  // ✅ Primeiro define navItems
   const navItems = useMemo(() => {
     return experiences.length
       ? [
           baseNavItems[0],
-          { href: "#experience", label: "Experience", icon: Briefcase },
+          { href: "#experience", label: "experience", icon: Briefcase },
           ...baseNavItems.slice(1),
         ]
       : baseNavItems;
   }, []);
 
-  // ✅ Depois usa no hook
-  const activeSection = useActiveSection(navItems.map((item) => item.href));
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map((item) => item.href.substring(1));
+      let current = "";
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom >= 200) {
+            current = section;
+          }
+        }
+      }
+      if (current) setActiveSection(`#${current}`);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [navItems]);
 
   const handleScrollTo = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -57,7 +67,6 @@ export default function Header() {
   ) => {
     event.preventDefault();
     setOpen(false);
-
     const element = document.querySelector(href);
     if (element) {
       const headerOffset = 80;
@@ -73,9 +82,12 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-bg/80 backdrop-blur-md">
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 h-20 border-b border-border/30 bg-bg/80 backdrop-blur-md",
+        )}
+      >
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
           <Link
             href="#home"
             onClick={(event) => handleScrollTo(event, "#home")}
@@ -84,14 +96,9 @@ export default function Header() {
             wms<span className="text-primary">.</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav
-            className="hidden items-center gap-8 lg:flex"
-            aria-label="Primary"
-          >
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
             {navItems.map((item) => {
               const isActive = activeSection === item.href;
-
               return (
                 <Link
                   key={item.href}
@@ -100,28 +107,26 @@ export default function Header() {
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "text-sm font-medium transition-colors",
-                    isActive
-                      ? "text-primary"
-                      : "text-muted hover:text-foreground",
+                    isActive ? "text-primary" : "text-muted hover:text-foreground",
                   )}
                 >
-                  {item.label}
+                  {t(`nav.${item.label}`)}
                 </Link>
               );
             })}
-
             <div className="h-6 w-px bg-border/70" />
+            <LanguageToggle />
             <ThemeToggle />
           </nav>
 
-          {/* Mobile Button */}
-          <div className="flex items-center gap-4 lg:hidden">
+          <div className="flex items-center gap-3 lg:hidden">
+            <LanguageToggle />
             <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen(true)}
               className="rounded-md border border-border/70 p-2 text-muted transition-colors hover:border-primary/40 hover:text-foreground"
-              aria-label="Open menu"
+              aria-label={t("header.openMenu")}
             >
               <Menu size={22} />
             </button>
@@ -129,9 +134,8 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {open && (
+        {open ? (
           <>
             <motion.div
               initial={{ opacity: 0 }}
@@ -140,7 +144,6 @@ export default function Header() {
               onClick={() => setOpen(false)}
               className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm lg:hidden"
             />
-
             <motion.aside
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
@@ -149,7 +152,7 @@ export default function Header() {
               className="fixed inset-y-0 right-0 z-[70] w-72 border-l border-border/70 bg-bg shadow-2xl lg:hidden"
             >
               <div className="flex items-center justify-between border-b border-border/70 p-6">
-                <span className="text-lg font-bold text-foreground">Menu</span>
+                <span className="text-lg font-bold text-foreground">{t("header.menu")}</span>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
@@ -162,7 +165,6 @@ export default function Header() {
               <nav className="flex flex-col gap-2 p-4" aria-label="Mobile">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.href;
-
                   return (
                     <Link
                       key={item.href}
@@ -177,20 +179,18 @@ export default function Header() {
                       )}
                     >
                       <item.icon size={20} />
-                      {item.label}
+                      {t(`nav.${item.label}`)}
                     </Link>
                   );
                 })}
               </nav>
 
               <div className="absolute bottom-0 w-full border-t border-border/70 p-6">
-                <p className="text-xs text-muted">
-                  (c) {new Date().getFullYear()} Wemerson
-                </p>
+                <p className="text-xs text-muted">(c) {new Date().getFullYear()} wms</p>
               </div>
             </motion.aside>
           </>
-        )}
+        ) : null}
       </AnimatePresence>
     </>
   );

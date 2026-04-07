@@ -3,6 +3,7 @@ import { IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
 import Header from "@/components/layout/Header";
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
+import { LanguageProvider } from "@/components/providers/LanguageProvider";
 
 const bodyFont = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -53,9 +54,11 @@ export default function RootLayout({
           }}
         />
 
-        <Header />
-        <main className="pt-20 min-h-screen">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <Header />
+          <main className="pt-20 min-h-screen">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

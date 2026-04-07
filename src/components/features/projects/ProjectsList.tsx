@@ -6,8 +6,11 @@ import { ProjectCard } from "./ProjectsCard";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motionBase, motionViewport } from "@/lib/motion";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ProjectList() {
+  const { t } = useLanguage();
+
   return (
     <Section id="projects" ariaLabelledby="projects-title" className="overflow-hidden">
       <motion.div
@@ -19,13 +22,13 @@ export default function ProjectList() {
       >
         <SectionHeader
           id="projects-title"
-          eyebrow="Selected"
+          eyebrow={t("projects.eyebrow")}
           title={
             <>
-              Featured <span className="text-primary">Projects</span>
+              {t("projects.title")} <span className="text-primary">{t("projects.titleAccent")}</span>
             </>
           }
-          subtitle="A curated selection of work spanning product UX, backend systems, and end-to-end delivery."
+          subtitle={t("projects.subtitle")}
           align="left"
         />
 
