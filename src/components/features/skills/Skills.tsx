@@ -74,7 +74,7 @@ function BentoCard({
 }
 
 export default function SkillsSection() {
-  const { t } = useLanguage();
+  const { tString } = useLanguage();
   const languages = skills.filter((skill) => skill.name !== "SQL");
   const learning = skills.filter((skill) => skill.level === "learning");
   const mainStack = frameworks;
@@ -94,47 +94,47 @@ export default function SkillsSection() {
       >
         <SectionHeader
           id="skills-title"
-          eyebrow={t("skills.eyebrow")}
+          eyebrow={tString("skills.eyebrow")}
           title={
             <>
-              {t("skills.title")} <span className="text-primary">{t("skills.titleAccent")}</span>
+              {tString("skills.title")} <span className="text-primary">{tString("skills.titleAccent")}</span>
             </>
           }
-          subtitle={t("skills.subtitle")}
+          subtitle={tString("skills.subtitle")}
           align="left"
         />
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
           <BentoCard
-            title={t("skills.cards.frameworks")}
+            title={tString("skills.cards.frameworks")}
             icon={Layers}
             className="lg:row-span-2"
             delay={0.1}
           >
             <p className="w-full text-sm text-muted mb-4">
-              {t("skills.frameworksDescription")}
+              {tString("skills.frameworksDescription")}
             </p>
             {mainStack.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
             ))}
           </BentoCard>
 
-          <BentoCard title={t("skills.cards.coreLanguages")} icon={Terminal} delay={0.2}>
+          <BentoCard title={tString("skills.cards.coreLanguages")} icon={Terminal} delay={0.2}>
             {languages.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
             ))}
           </BentoCard>
 
-          <BentoCard title={t("skills.cards.infraData")} icon={Database} delay={0.3}>
+          <BentoCard title={tString("skills.cards.infraData")} icon={Database} delay={0.3}>
             {dbAndTools.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
             ))}
           </BentoCard>
 
-          <BentoCard title={t("skills.cards.exploring")} icon={Globe} className="lg:col-span-2" delay={0.4}>
+          <BentoCard title={tString("skills.cards.exploring")} icon={Globe} className="lg:col-span-2" delay={0.4}>
             <div className="flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <span className="text-sm text-muted">
-                {t("skills.exploringDescription")}
+                {tString("skills.exploringDescription")}
               </span>
               <div className="flex flex-wrap gap-2">
                 {learning.map((item) => (

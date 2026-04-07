@@ -8,7 +8,7 @@ import { motionBase, motionViewport } from "@/lib/motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ContactSection() {
-  const { t } = useLanguage();
+  const { tString } = useLanguage();
 
   return (
     <Section id="contact" ariaLabelledby="contact-title" className="pb-28">
@@ -28,22 +28,22 @@ export default function ContactSection() {
         </div>
 
         <h2 id="contact-title" className="relative z-10 font-display text-3xl font-bold text-foreground sm:text-4xl">
-          {t("contact.title")}
+          {tString("contact.title")}
         </h2>
         <p className="relative z-10 text-base text-muted sm:text-lg">
-          {t("contact.subtitle")}
+          {tString("contact.subtitle")}
         </p>
 
         <div className="relative z-10 flex flex-col gap-4 justify-center pt-2 sm:flex-row">
           <a href="mailto:dev.wmsalves@gmail.com">
             <Button className="h-12 px-8 w-full sm:w-auto bg-foreground text-bg hover:bg-foreground/90 border-none">
               <Mail className="mr-2 h-4 w-4" />
-              {t("contact.cta")}
+              {tString("contact.cta")}
             </Button>
           </a>
         </div>
 
-        <p className="relative z-10 text-sm text-muted">{t("contact.helper")}</p>
+        <p className="relative z-10 text-sm text-muted">{tString("contact.helper")}</p>
       </motion.div>
     </Section>
   );

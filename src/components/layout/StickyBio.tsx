@@ -14,13 +14,13 @@ const sectionIcons: Record<SectionKey, React.ComponentType<{ size?: number; clas
 };
 
 export default function StickyBio() {
-  const { t } = useLanguage();
+  const { tString, tArray } = useLanguage();
   const activeSection = useActiveSection(["#home", "#projects", "#skills"]) as SectionKey;
 
   const Icon = sectionIcons[activeSection] || Sparkles;
 
   const sectionKey = activeSection.replace("#", "") as "home" | "projects" | "skills";
-  const insights = (t(`sticky.insights.${sectionKey}`) as string[]) || [];
+  const insights = tArray(`sticky.insights.${sectionKey}`);
 
   return (
     <aside className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface/80 p-6 backdrop-blur-md">
@@ -32,7 +32,7 @@ export default function StickyBio() {
       <div className="relative z-10 flex items-center justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">Wemerson Alves</p>
-          <h2 className="font-display mt-2 text-xl font-semibold text-foreground">{t("sticky.role")}</h2>
+          <h2 className="font-display mt-2 text-xl font-semibold text-foreground">{tString("sticky.role")}</h2>
         </div>
         <span className="rounded-full border border-border/70 bg-surface-2/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">
           {new Date().getFullYear()}
@@ -42,22 +42,22 @@ export default function StickyBio() {
       <div className="relative z-10 mt-6 space-y-3 text-sm text-muted">
         <div className="flex items-center gap-2">
           <MapPin size={14} className="text-primary" />
-          {t("sticky.location")}
+          {tString("sticky.location")}
         </div>
         <div className="flex items-center gap-2">
           <CalendarClock size={14} className="text-primary" />
-          {t("sticky.open")}
+          {tString("sticky.open")}
         </div>
       </div>
 
       <div className="relative z-10 mt-6 rounded-2xl border border-border/70 bg-surface-2/70 p-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{t("sticky.now")}</p>
-        <p className="mt-2 text-sm text-foreground">{t("sticky.nowText")}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{tString("sticky.now")}</p>
+        <p className="mt-2 text-sm text-foreground">{tString("sticky.nowText")}</p>
       </div>
 
       <div className="relative z-10 mt-4 rounded-2xl border border-border/70 bg-surface-2/70 p-4">
         <div className="flex items-center justify-between">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{t("sticky.active")}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{tString("sticky.active")}</p>
           <Icon size={14} className="text-primary" />
         </div>
 
@@ -71,7 +71,7 @@ export default function StickyBio() {
             className="mt-2 space-y-2 will-change-transform"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-              {t("sticky.exploring", { section: t(`sticky.sections.${sectionKey}`) })}
+              {tString("sticky.exploring", { section: tString(`sticky.sections.${sectionKey}`) })}
             </p>
 
             {insights.map((insight) => (

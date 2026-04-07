@@ -9,7 +9,7 @@ import { motionBase, motionViewport } from "@/lib/motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ProjectList() {
-  const { t } = useLanguage();
+  const { tString } = useLanguage();
 
   return (
     <Section id="projects" ariaLabelledby="projects-title" className="overflow-hidden">
@@ -22,13 +22,13 @@ export default function ProjectList() {
       >
         <SectionHeader
           id="projects-title"
-          eyebrow={t("projects.eyebrow")}
+          eyebrow={tString("projects.eyebrow")}
           title={
             <>
-              {t("projects.title")} <span className="text-primary">{t("projects.titleAccent")}</span>
+              {tString("projects.title")} <span className="text-primary">{tString("projects.titleAccent")}</span>
             </>
           }
-          subtitle={t("projects.subtitle")}
+          subtitle={tString("projects.subtitle")}
           align="left"
         />
 

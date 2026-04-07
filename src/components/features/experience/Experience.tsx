@@ -8,7 +8,7 @@ import { motionBase, motionViewport } from "@/lib/motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function ExperienceSection() {
-  const { t } = useLanguage();
+  const { tString } = useLanguage();
   if (experiences.length === 0) return null;
 
   return (
@@ -22,13 +22,13 @@ export default function ExperienceSection() {
       >
         <SectionHeader
           id="experience-title"
-          eyebrow={t("experience.eyebrow")}
+          eyebrow={tString("experience.eyebrow")}
           title={
             <>
-              {t("experience.title")} <span className="text-primary">{t("experience.titleAccent")}</span>
+              {tString("experience.title")} <span className="text-primary">{tString("experience.titleAccent")}</span>
             </>
           }
-          subtitle={t("experience.subtitle")}
+          subtitle={tString("experience.subtitle")}
           align="left"
         />
 

@@ -8,7 +8,7 @@ import { motionBase, motionViewport } from "@/lib/motion";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function About() {
-  const { t } = useLanguage();
+  const { tString, tArray } = useLanguage();
 
   return (
     <Section id="about" ariaLabelledby="about-title">
@@ -21,13 +21,13 @@ export default function About() {
       >
         <SectionHeader
           id="about-title"
-          eyebrow={t("about.eyebrow")}
+          eyebrow={tString("about.eyebrow")}
           title={
             <>
-              {t("about.title")} <span className="text-primary">{t("about.titleAccent")}</span>
+              {tString("about.title")} <span className="text-primary">{tString("about.titleAccent")}</span>
             </>
           }
-          subtitle={t("about.subtitle")}
+          subtitle={tString("about.subtitle")}
           align="left"
         />
 
@@ -38,7 +38,7 @@ export default function About() {
               className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
             />
             <div className="relative z-10 space-y-5 text-muted text-base leading-relaxed sm:text-lg">
-              {(t("about.paragraphs") as string[]).map((paragraph) => (
+              {tArray("about.paragraphs").map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
@@ -50,14 +50,14 @@ export default function About() {
                 <Briefcase size={24} />
               </div>
               <span className="block text-3xl font-bold text-foreground mb-1">2+</span>
-              <span className="text-xs uppercase tracking-wider text-muted">{t("about.yearsExp")}</span>
+              <span className="text-xs uppercase tracking-wider text-muted">{tString("about.yearsExp")}</span>
             </div>
             <div className="rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-colors hover:border-primary/40">
               <div className="mb-3 flex justify-center text-primary">
                 <Trophy size={24} />
               </div>
               <span className="block text-3xl font-bold text-foreground mb-1">10+</span>
-              <span className="text-xs uppercase tracking-wider text-muted">{t("about.projects")}</span>
+              <span className="text-xs uppercase tracking-wider text-muted">{tString("about.projects")}</span>
             </div>
           </div>
         </motion.div>

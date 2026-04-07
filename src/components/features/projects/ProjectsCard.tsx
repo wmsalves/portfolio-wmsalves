@@ -13,7 +13,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
-  const { language, t } = useLanguage();
+  const { language, tString } = useLanguage();
 
   return (
     <motion.article
@@ -33,7 +33,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={t("projects.openRepo", { title: project.title })}
+          aria-label={tString("projects.openRepo", { title: project.title })}
           className="block h-full w-full"
         >
           <Image
@@ -61,7 +61,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border border-border/70 p-2 text-muted transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
-            aria-label={t("projects.viewProject", { title: project.title })}
+            aria-label={tString("projects.viewProject", { title: project.title })}
           >
             <ArrowUpRight size={20} />
           </a>

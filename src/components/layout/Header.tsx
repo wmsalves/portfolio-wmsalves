@@ -29,7 +29,7 @@ const baseNavItems: NavItem[] = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
-  const { t } = useLanguage();
+  const { tString } = useLanguage();
 
   const navItems = useMemo(() => {
     return experiences.length
@@ -110,7 +110,7 @@ export default function Header() {
                     isActive ? "text-primary" : "text-muted hover:text-foreground",
                   )}
                 >
-                  {t(`nav.${item.label}`)}
+                  {tString(`nav.${item.label}`)}
                 </Link>
               );
             })}
@@ -126,7 +126,7 @@ export default function Header() {
               type="button"
               onClick={() => setOpen(true)}
               className="rounded-md border border-border/70 p-2 text-muted transition-colors hover:border-primary/40 hover:text-foreground"
-              aria-label={t("header.openMenu")}
+              aria-label={tString("header.openMenu")}
             >
               <Menu size={22} />
             </button>
@@ -152,7 +152,7 @@ export default function Header() {
               className="fixed inset-y-0 right-0 z-[70] w-72 border-l border-border/70 bg-bg shadow-2xl lg:hidden"
             >
               <div className="flex items-center justify-between border-b border-border/70 p-6">
-                <span className="text-lg font-bold text-foreground">{t("header.menu")}</span>
+                <span className="text-lg font-bold text-foreground">{tString("header.menu")}</span>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
@@ -179,7 +179,7 @@ export default function Header() {
                       )}
                     >
                       <item.icon size={20} />
-                      {t(`nav.${item.label}`)}
+                      {tString(`nav.${item.label}`)}
                     </Link>
                   );
                 })}

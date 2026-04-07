@@ -18,7 +18,7 @@ const baseTopics = [
 ];
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { tString, tArray } = useLanguage();
 
   return (
     <Section
@@ -41,7 +41,7 @@ export default function Hero() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
-                {t("hero.badge")}
+                {tString("hero.badge")}
               </div>
             </motion.div>
 
@@ -50,18 +50,18 @@ export default function Hero() {
               variants={motionBase.fadeUp}
               className="font-display max-w-xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-6xl leading-[1.05]"
             >
-              {t("hero.titleTop")}
+              {tString("hero.titleTop")}
               <span className="block bg-gradient-to-r from-primary to-primary-2 bg-clip-text text-transparent">
-                {t("hero.titleAccent")}
+                {tString("hero.titleAccent")}
               </span>
-              {t("hero.titleBottom")}
+              {tString("hero.titleBottom")}
             </motion.h1>
 
             <motion.p
               variants={motionBase.fadeUp}
               className="max-w-xl text-base text-muted sm:text-lg leading-relaxed"
             >
-              {t("hero.description")}
+              {tString("hero.description")}
             </motion.p>
 
             <motion.div variants={motionBase.fadeUp} className="flex flex-wrap gap-2 -mt-2">
@@ -77,18 +77,18 @@ export default function Hero() {
                     topic.href === "#projects" && "border-primary/40 text-foreground",
                   )}
                 >
-                  {t(`hero.topics.${topic.label}`)}
+                  {tString(`hero.topics.${topic.label}`)}
                 </Link>
               ))}
             </motion.div>
 
             <motion.div variants={motionBase.fadeUp} className="flex flex-wrap items-center gap-4">
               <Link href="#projects">
-                <Button className="h-12 px-7 text-sm border border-primary/40">{t("hero.cta")}</Button>
+                <Button className="h-12 px-7 text-sm border border-primary/40">{tString("hero.cta")}</Button>
               </Link>
               <div className="flex gap-3">
-                <SocialBtn href="https://github.com/wmsalves" icon={Github} label={t("social.github")} />
-                <SocialBtn href="https://linkedin.com/in/wmsalves" icon={Linkedin} label={t("social.linkedin")} />
+                <SocialBtn href="https://github.com/wmsalves" icon={Github} label={tString("social.github")} />
+                <SocialBtn href="https://linkedin.com/in/wmsalves" icon={Linkedin} label={tString("social.linkedin")} />
               </div>
             </motion.div>
           </div>
@@ -100,22 +100,22 @@ export default function Hero() {
             <div className="flex flex-col gap-5">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
-                  {t("hero.card.now")}
+                  {tString("hero.card.now")}
                 </p>
                 <h2 className="mt-3 text-2xl font-semibold text-foreground">
-                  {t("hero.card.title")}
+                  {tString("hero.card.title")}
                 </h2>
                 <p className="mt-3 text-sm text-muted">
-                  {t("hero.card.description")}
+                  {tString("hero.card.description")}
                 </p>
               </div>
 
               <div className="rounded-2xl border border-border/70 bg-surface-2/70 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                  {t("hero.card.focus")}
+                  {tString("hero.card.focus")}
                 </p>
                 <ul className="mt-3 space-y-2 text-sm text-muted">
-                  {(t("hero.card.focusItems") as string[]).map((item) => (
+                  {tArray("hero.card.focusItems").map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
@@ -123,13 +123,13 @@ export default function Hero() {
 
               <div className="rounded-2xl border border-border/70 bg-surface-2/70 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                  {t("hero.card.availability")}
+                  {tString("hero.card.availability")}
                 </p>
                 <p className="mt-2 text-sm text-foreground">
-                  {t("hero.card.availabilityText")}
+                  {tString("hero.card.availabilityText")}
                 </p>
                 <Link href="#contact" className="mt-3 inline-flex items-center text-sm font-semibold text-primary">
-                  {t("hero.card.startConversation")} <ArrowRight className="ml-2 h-4 w-4" />
+                  {tString("hero.card.startConversation")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
             </div>

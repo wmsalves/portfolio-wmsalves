@@ -1,6 +1,11 @@
 ﻿export type Language = "en" | "pt-BR";
 
-type Translations = Record<string, any>;
+export type TranslationValue =
+  | string
+  | TranslationValue[]
+  | { [key: string]: TranslationValue };
+
+type Translations = Record<string, TranslationValue>;
 
 export const translations: Record<Language, Translations> = {
   en: {
@@ -308,10 +313,22 @@ export function getTranslation(
 ) {
   const value = key
     .split(".")
-    .reduce<any>((acc, part) => (acc ? acc[part] : undefined), translations[lang]) ??
+    .reduce<TranslationValue | undefined>(
+      (acc, part) =>
+        acc && typeof acc === "object" && part in acc
+          ? (acc as Record<string, TranslationValue>)[part]
+          : undefined,
+      translations[lang],
+    ) ??
     key
       .split(".")
-      .reduce<any>((acc, part) => (acc ? acc[part] : undefined), translations.en) ??
+      .reduce<TranslationValue | undefined>(
+        (acc, part) =>
+          acc && typeof acc === "object" && part in acc
+            ? (acc as Record<string, TranslationValue>)[part]
+            : undefined,
+        translations.en,
+      ) ??
     key;
 
   if (typeof value !== "string") return value;

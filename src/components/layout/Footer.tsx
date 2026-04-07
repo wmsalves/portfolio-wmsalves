@@ -6,7 +6,7 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const { t } = useLanguage();
+  const { tString } = useLanguage();
 
   return (
     <footer className="border-t border-border/70 bg-bg pt-16 pb-8">
@@ -15,37 +15,37 @@ export default function Footer() {
           <Link href="#home" className="text-2xl font-bold tracking-tight text-foreground">
             wms<span className="text-primary">.</span>
           </Link>
-          <p className="mt-4 max-w-md text-sm text-muted">{t("footer.tagline")}</p>
+          <p className="mt-4 max-w-md text-sm text-muted">{tString("footer.tagline")}</p>
 
           <div className="mt-8 flex flex-col items-center gap-6 md:flex-row md:gap-10">
             <div className="flex flex-col items-center gap-3">
-              <h3 className="text-sm font-semibold text-foreground">{t("footer.navigation")}</h3>
+              <h3 className="text-sm font-semibold text-foreground">{tString("footer.navigation")}</h3>
               <ul className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted">
                 <li>
                   <Link href="#home" className="hover:text-foreground transition-colors">
-                    {t("nav.home")}
+                    {tString("nav.home")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#projects" className="hover:text-foreground transition-colors">
-                    {t("nav.projects")}
+                    {tString("nav.projects")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#skills" className="hover:text-foreground transition-colors">
-                    {t("nav.skills")}
+                    {tString("nav.skills")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#contact" className="hover:text-foreground transition-colors">
-                    {t("nav.contact")}
+                    {tString("nav.contact")}
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div className="flex flex-col items-center gap-3">
-              <h3 className="text-sm font-semibold text-foreground">{t("footer.social")}</h3>
+              <h3 className="text-sm font-semibold text-foreground">{tString("footer.social")}</h3>
               <ul className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted">
                 <li>
                   <a
@@ -54,7 +54,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-foreground transition-colors"
                   >
-                    <Github size={16} /> GitHub
+                    <Github size={16} /> {tString("social.github")}
                   </a>
                 </li>
                 <li>
@@ -64,7 +64,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-foreground transition-colors"
                   >
-                    <Linkedin size={16} /> LinkedIn
+                    <Linkedin size={16} /> {tString("social.linkedin")}
                   </a>
                 </li>
               </ul>
@@ -73,8 +73,8 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border/70 pt-8 flex flex-col items-center justify-center gap-2 text-center">
-          <p className="text-xs text-muted">{t("footer.rights", { year: currentYear })}</p>
-          <p className="text-xs text-muted">{t("footer.builtWith")}</p>
+          <p className="text-xs text-muted">{tString("footer.rights", { year: currentYear })}</p>
+          <p className="text-xs text-muted">{tString("footer.builtWith")}</p>
         </div>
       </div>
     </footer>
