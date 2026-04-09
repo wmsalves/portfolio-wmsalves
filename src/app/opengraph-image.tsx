@@ -8,6 +8,8 @@ export const size = {
 export const contentType = "image/png";
 
 export default function OpenGraphImage() {
+  const logoUrl = "https://portfolio-wmsalves.vercel.app/favicons/Logo.png";
+
   return new ImageResponse(
     <div
       style={{
@@ -63,15 +65,22 @@ export default function OpenGraphImage() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background:
-                  "linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(15, 23, 42, 0.18))",
+                overflow: "hidden",
+                background: "rgba(15, 23, 42, 0.18)",
                 border: "1px solid rgba(125, 211, 252, 0.32)",
-                fontSize: "34px",
-                fontWeight: 800,
-                letterSpacing: "-0.04em",
               }}
             >
-              w
+              <img
+                src={logoUrl}
+                alt="Wemerson logo"
+                width="72"
+                height="72"
+                style={{
+                  width: "72px",
+                  height: "72px",
+                  objectFit: "cover",
+                }}
+              />
             </div>
             <div
               style={{
