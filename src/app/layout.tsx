@@ -20,6 +20,11 @@ const displayFont = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Wemerson | Portfolio",
   description: "Web developer portfolio built with Next.js",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/favicons/LogoLight.svg",
+  },
 };
 
 export default function RootLayout({

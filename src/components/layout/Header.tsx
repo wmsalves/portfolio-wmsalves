@@ -1,9 +1,19 @@
 ﻿"use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useMemo, type ComponentType } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Home, User, FileText, Layers, Mail, Menu, X, Briefcase } from "lucide-react";
+import {
+  Home,
+  User,
+  FileText,
+  Layers,
+  Mail,
+  Menu,
+  X,
+  Briefcase,
+} from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import LanguageToggle from "@/components/ui/LanguageToggle";
 import { cn } from "@/lib/utils";
@@ -91,12 +101,34 @@ export default function Header() {
           <Link
             href="#home"
             onClick={(event) => handleScrollTo(event, "#home")}
-            className="text-2xl font-extrabold tracking-tight text-foreground"
+            className="flex items-center gap-3 text-foreground"
+            aria-label="wms home"
           >
-            wms<span className="text-primary">.</span>
+            <Image
+              src="/favicons/LogoDark.svg"
+              alt="wms logo"
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-xl object-cover dark:hidden"
+              priority
+            />
+            <Image
+              src="/favicons/LogoLight.svg"
+              alt="wms logo"
+              width={40}
+              height={40}
+              className="hidden h-10 w-10 rounded-xl object-cover dark:block"
+              priority
+            />
+            <span className="text-2xl font-extrabold tracking-tight">
+              wms<span className="text-primary">.</span>
+            </span>
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
+          <nav
+            className="hidden items-center gap-6 lg:flex"
+            aria-label="Primary"
+          >
             {navItems.map((item) => {
               const isActive = activeSection === item.href;
               return (
@@ -107,7 +139,9 @@ export default function Header() {
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "text-sm font-medium transition-colors",
-                    isActive ? "text-primary" : "text-muted hover:text-foreground",
+                    isActive
+                      ? "text-primary"
+                      : "text-muted hover:text-foreground",
                   )}
                 >
                   {tString(`nav.${item.label}`)}
@@ -152,7 +186,9 @@ export default function Header() {
               className="fixed inset-y-0 right-0 z-[70] w-72 border-l border-border/70 bg-bg shadow-2xl lg:hidden"
             >
               <div className="flex items-center justify-between border-b border-border/70 p-6">
-                <span className="text-lg font-bold text-foreground">{tString("header.menu")}</span>
+                <span className="text-lg font-bold text-foreground">
+                  {tString("header.menu")}
+                </span>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
@@ -186,7 +222,9 @@ export default function Header() {
               </nav>
 
               <div className="absolute bottom-0 w-full border-t border-border/70 p-6">
-                <p className="text-xs text-muted">(c) {new Date().getFullYear()} wms</p>
+                <p className="text-xs text-muted">
+                  (c) {new Date().getFullYear()} wms
+                </p>
               </div>
             </motion.aside>
           </>
