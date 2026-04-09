@@ -18,12 +18,35 @@ const displayFont = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portfolio-wmsalves.vercel.app"),
   title: "Wemerson | Portfolio",
-  description: "Web developer portfolio built with Next.js",
+  description: "Turning ideas into responsive and dynamic web apps",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
     apple: "/favicons/LogoLight.svg",
+  },
+  openGraph: {
+    title: "Wemerson | Portfolio",
+    description: "Turning ideas into responsive and dynamic web apps",
+    url: "https://portfolio-wmsalves.vercel.app",
+    siteName: "Wemerson Portfolio",
+    locale: "pt_BR",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Wemerson Portfolio preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wemerson | Portfolio",
+    description: "Turning ideas into responsive and dynamic web apps",
+    images: ["/twitter-image"],
   },
 };
 
