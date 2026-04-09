@@ -21,7 +21,9 @@ export function SectionHeader({
     <div
       className={cn(
         "mx-auto mb-12 flex max-w-2xl flex-col gap-3",
-        align === "center" ? "items-center text-center" : "items-start text-left",
+        align === "center"
+          ? "items-center text-center"
+          : "items-start text-left",
       )}
     >
       {eyebrow ? (

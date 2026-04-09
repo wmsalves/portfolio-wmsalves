@@ -12,7 +12,11 @@ export default function ProjectList() {
   const { tString } = useLanguage();
 
   return (
-    <Section id="projects" ariaLabelledby="projects-title" className="overflow-hidden">
+    <Section
+      id="projects"
+      ariaLabelledby="projects-title"
+      className="overflow-hidden"
+    >
       <motion.div
         className="relative"
         initial="hidden"
@@ -25,14 +29,20 @@ export default function ProjectList() {
           eyebrow={tString("projects.eyebrow")}
           title={
             <>
-              {tString("projects.title")} <span className="text-primary">{tString("projects.titleAccent")}</span>
+              {tString("projects.title")}{" "}
+              <span className="text-primary">
+                {tString("projects.titleAccent")}
+              </span>
             </>
           }
           subtitle={tString("projects.subtitle")}
           align="left"
         />
 
-        <motion.div className="grid grid-cols-1 gap-8 md:grid-cols-2" variants={motionBase.stagger}>
+        <motion.div
+          className="grid grid-cols-1 gap-8 md:grid-cols-2"
+          variants={motionBase.stagger}
+        >
           {projects.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={index} />
           ))}

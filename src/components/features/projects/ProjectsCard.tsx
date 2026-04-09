@@ -61,7 +61,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border border-border/70 p-2 text-muted transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-foreground"
-            aria-label={tString("projects.viewProject", { title: project.title })}
+            aria-label={tString("projects.viewProject", {
+              title: project.title,
+            })}
           >
             <ArrowUpRight size={20} />
           </a>

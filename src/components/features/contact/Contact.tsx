@@ -21,13 +21,16 @@ export default function ContactSection() {
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+          className="pointer-events-none absolute inset-0 opacity-0 rounded-2xl transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_40%)]"
         />
         <div className="relative z-10 mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
           <Mail size={30} />
         </div>
 
-        <h2 id="contact-title" className="relative z-10 font-display text-3xl font-bold text-foreground sm:text-4xl">
+        <h2
+          id="contact-title"
+          className="relative z-10 font-display text-3xl font-bold text-foreground sm:text-4xl"
+        >
           {tString("contact.title")}
         </h2>
         <p className="relative z-10 text-base text-muted sm:text-lg">
@@ -43,7 +46,9 @@ export default function ContactSection() {
           </a>
         </div>
 
-        <p className="relative z-10 text-sm text-muted">{tString("contact.helper")}</p>
+        <p className="relative z-10 text-sm text-muted">
+          {tString("contact.helper")}
+        </p>
       </motion.div>
     </Section>
   );

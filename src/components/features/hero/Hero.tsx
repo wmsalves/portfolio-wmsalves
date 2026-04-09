@@ -35,7 +35,10 @@ export default function Hero() {
           className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-start"
         >
           <div className="flex flex-col gap-5">
-            <motion.div variants={motionBase.fadeUp} className="flex justify-start">
+            <motion.div
+              variants={motionBase.fadeUp}
+              className="flex justify-start"
+            >
               <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60" />
@@ -64,7 +67,10 @@ export default function Hero() {
               {tString("hero.description")}
             </motion.p>
 
-            <motion.div variants={motionBase.fadeUp} className="flex flex-wrap gap-2 -mt-2">
+            <motion.div
+              variants={motionBase.fadeUp}
+              className="flex flex-wrap gap-2 -mt-2"
+            >
               {(experiences.length
                 ? [{ label: "experience", href: "#experience" }, ...baseTopics]
                 : baseTopics
@@ -74,7 +80,8 @@ export default function Hero() {
                   href={topic.href}
                   className={cn(
                     "rounded-full border border-border/70 bg-surface/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted transition-colors",
-                    topic.href === "#projects" && "border-primary/40 text-foreground",
+                    topic.href === "#projects" &&
+                      "border-primary/40 text-foreground",
                   )}
                 >
                   {tString(`hero.topics.${topic.label}`)}
@@ -82,13 +89,26 @@ export default function Hero() {
               ))}
             </motion.div>
 
-            <motion.div variants={motionBase.fadeUp} className="flex flex-wrap items-center gap-4">
+            <motion.div
+              variants={motionBase.fadeUp}
+              className="flex flex-wrap items-center gap-4"
+            >
               <Link href="#projects">
-                <Button className="h-12 px-7 text-sm border border-primary/40">{tString("hero.cta")}</Button>
+                <Button className="h-12 px-7 text-sm border border-primary/40">
+                  {tString("hero.cta")}
+                </Button>
               </Link>
               <div className="flex gap-3">
-                <SocialBtn href="https://github.com/wmsalves" icon={Github} label={tString("social.github")} />
-                <SocialBtn href="https://linkedin.com/in/wmsalves" icon={Linkedin} label={tString("social.linkedin")} />
+                <SocialBtn
+                  href="https://github.com/wmsalves"
+                  icon={Github}
+                  label={tString("social.github")}
+                />
+                <SocialBtn
+                  href="https://linkedin.com/in/wmsalves"
+                  icon={Linkedin}
+                  label={tString("social.linkedin")}
+                />
               </div>
             </motion.div>
           </div>
@@ -128,8 +148,12 @@ export default function Hero() {
                 <p className="mt-2 text-sm text-foreground">
                   {tString("hero.card.availabilityText")}
                 </p>
-                <Link href="#contact" className="mt-3 inline-flex items-center text-sm font-semibold text-primary">
-                  {tString("hero.card.startConversation")} <ArrowRight className="ml-2 h-4 w-4" />
+                <Link
+                  href="#contact"
+                  className="mt-3 inline-flex items-center text-sm font-semibold text-primary"
+                >
+                  {tString("hero.card.startConversation")}{" "}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
             </div>

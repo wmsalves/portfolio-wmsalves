@@ -24,18 +24,24 @@ export default function About() {
           eyebrow={tString("about.eyebrow")}
           title={
             <>
-              {tString("about.title")} <span className="text-primary">{tString("about.titleAccent")}</span>
+              {tString("about.title")}{" "}
+              <span className="text-primary">
+                {tString("about.titleAccent")}
+              </span>
             </>
           }
           subtitle={tString("about.subtitle")}
           align="left"
         />
 
-        <motion.div variants={motionBase.fadeUp} className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+        <motion.div
+          variants={motionBase.fadeUp}
+          className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]"
+        >
           <div className="group relative rounded-2xl border border-border/60 bg-surface/70 p-8 backdrop-blur-sm md:p-10">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+              className="pointer-events-none absolute inset-0 opacity-0 rounded-2xl transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
             />
             <div className="relative z-10 space-y-5 text-muted text-base leading-relaxed sm:text-lg">
               {tArray("about.paragraphs").map((paragraph) => (
@@ -49,15 +55,23 @@ export default function About() {
               <div className="mb-3 flex justify-center text-primary">
                 <Briefcase size={24} />
               </div>
-              <span className="block text-3xl font-bold text-foreground mb-1">2+</span>
-              <span className="text-xs uppercase tracking-wider text-muted">{tString("about.yearsExp")}</span>
+              <span className="block text-3xl font-bold text-foreground mb-1">
+                2+
+              </span>
+              <span className="text-xs uppercase tracking-wider text-muted">
+                {tString("about.yearsExp")}
+              </span>
             </div>
             <div className="rounded-2xl border border-border/60 bg-surface-2/70 p-6 text-center transition-colors hover:border-primary/40">
               <div className="mb-3 flex justify-center text-primary">
                 <Trophy size={24} />
               </div>
-              <span className="block text-3xl font-bold text-foreground mb-1">10+</span>
-              <span className="text-xs uppercase tracking-wider text-muted">{tString("about.projects")}</span>
+              <span className="block text-3xl font-bold text-foreground mb-1">
+                10+
+              </span>
+              <span className="text-xs uppercase tracking-wider text-muted">
+                {tString("about.projects")}
+              </span>
             </div>
           </div>
         </motion.div>

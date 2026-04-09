@@ -54,8 +54,7 @@ export const translations: Record<Language, Translations> = {
           "Human-centered product decisions",
         ],
         availability: "Availability",
-        availabilityText:
-          "Open for select freelance and product partnerships.",
+        availabilityText: "Open for select freelance and product partnerships.",
         startConversation: "Start a conversation",
       },
     },
@@ -311,24 +310,17 @@ export function getTranslation(
   key: string,
   vars?: Record<string, string | number>,
 ) {
-  const value = key
-    .split(".")
-    .reduce<TranslationValue | undefined>(
-      (acc, part) =>
-        acc && typeof acc === "object" && part in acc
-          ? (acc as Record<string, TranslationValue>)[part]
-          : undefined,
-      translations[lang],
-    ) ??
+  const value =
     key
       .split(".")
-      .reduce<TranslationValue | undefined>(
-        (acc, part) =>
-          acc && typeof acc === "object" && part in acc
-            ? (acc as Record<string, TranslationValue>)[part]
-            : undefined,
-        translations.en,
-      ) ??
+      .reduce<
+        TranslationValue | undefined
+      >((acc, part) => (acc && typeof acc === "object" && part in acc ? (acc as Record<string, TranslationValue>)[part] : undefined), translations[lang]) ??
+    key
+      .split(".")
+      .reduce<
+        TranslationValue | undefined
+      >((acc, part) => (acc && typeof acc === "object" && part in acc ? (acc as Record<string, TranslationValue>)[part] : undefined), translations.en) ??
     key;
 
   if (typeof value !== "string") return value;

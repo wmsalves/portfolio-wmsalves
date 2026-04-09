@@ -25,7 +25,10 @@ export default function ExperienceSection() {
           eyebrow={tString("experience.eyebrow")}
           title={
             <>
-              {tString("experience.title")} <span className="text-primary">{tString("experience.titleAccent")}</span>
+              {tString("experience.title")}{" "}
+              <span className="text-primary">
+                {tString("experience.titleAccent")}
+              </span>
             </>
           }
           subtitle={tString("experience.subtitle")}
@@ -42,7 +45,9 @@ export default function ExperienceSection() {
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">{experience.role}</h3>
+                  <h3 className="text-xl font-semibold text-foreground">
+                    {experience.role}
+                  </h3>
                   <p className="text-sm text-muted">
                     {experience.company}
                     {experience.location ? ` • ${experience.location}` : ""}
@@ -53,7 +58,9 @@ export default function ExperienceSection() {
                 </span>
               </div>
 
-              <p className="mt-4 text-base text-muted leading-relaxed">{experience.summary}</p>
+              <p className="mt-4 text-base text-muted leading-relaxed">
+                {experience.summary}
+              </p>
 
               {experience.highlights.length > 0 ? (
                 <ul className="mt-4 space-y-2 text-sm text-muted">

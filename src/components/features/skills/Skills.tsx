@@ -59,13 +59,15 @@ function BentoCard({
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity rounded-2xl duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.14),transparent_60%)]"
       />
       <div className="relative z-10 mb-4 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-2 text-primary">
           <Icon size={20} />
         </div>
-        <h3 className="font-display text-lg font-semibold text-foreground">{title}</h3>
+        <h3 className="font-display text-lg font-semibold text-foreground">
+          {title}
+        </h3>
       </div>
 
       <div className="relative z-10 flex flex-wrap gap-2">{children}</div>
@@ -84,7 +86,11 @@ export default function SkillsSection() {
   ];
 
   return (
-    <Section id="skills" ariaLabelledby="skills-title" className="overflow-hidden">
+    <Section
+      id="skills"
+      ariaLabelledby="skills-title"
+      className="overflow-hidden"
+    >
       <motion.div
         className="relative"
         initial="hidden"
@@ -97,7 +103,10 @@ export default function SkillsSection() {
           eyebrow={tString("skills.eyebrow")}
           title={
             <>
-              {tString("skills.title")} <span className="text-primary">{tString("skills.titleAccent")}</span>
+              {tString("skills.title")}{" "}
+              <span className="text-primary">
+                {tString("skills.titleAccent")}
+              </span>
             </>
           }
           subtitle={tString("skills.subtitle")}
@@ -119,26 +128,43 @@ export default function SkillsSection() {
             ))}
           </BentoCard>
 
-          <BentoCard title={tString("skills.cards.coreLanguages")} icon={Terminal} delay={0.2}>
+          <BentoCard
+            title={tString("skills.cards.coreLanguages")}
+            icon={Terminal}
+            delay={0.2}
+          >
             {languages.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
             ))}
           </BentoCard>
 
-          <BentoCard title={tString("skills.cards.infraData")} icon={Database} delay={0.3}>
+          <BentoCard
+            title={tString("skills.cards.infraData")}
+            icon={Database}
+            delay={0.3}
+          >
             {dbAndTools.map((item) => (
               <SkillPill key={item.name} name={item.name} level={item.level} />
             ))}
           </BentoCard>
 
-          <BentoCard title={tString("skills.cards.exploring")} icon={Globe} className="lg:col-span-2" delay={0.4}>
+          <BentoCard
+            title={tString("skills.cards.exploring")}
+            icon={Globe}
+            className="lg:col-span-2"
+            delay={0.4}
+          >
             <div className="flex w-full flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
               <span className="text-sm text-muted">
                 {tString("skills.exploringDescription")}
               </span>
               <div className="flex flex-wrap gap-2">
                 {learning.map((item) => (
-                  <SkillPill key={item.name} name={item.name} level={item.level} />
+                  <SkillPill
+                    key={item.name}
+                    name={item.name}
+                    level={item.level}
+                  />
                 ))}
               </div>
             </div>
